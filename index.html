@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 مراجعة شاملة - فيزياء الصف 12 متقدم (الكهرباء الساكنة)</title>
+    <meta name="description" content="مراجعة شاملة قبل الميد تيرم - الشحنة الكهربية، قانون كولوم، الشحن بالحث، المكشاف الكهربائي">
+    <meta name="author" content="Mr. Mohammed Hesham">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Cairo', sans-serif; }
+        body.en-mode { font-family: 'Inter', sans-serif; }
+        .correct { background-color: #dcfce7 !important; border-color: #16a34a !important; }
+        .incorrect { background-color: #fee2e2 !important; border-color: #dc2626 !important; }
+        .timer-warning { color: #dc2626 !important; animation: pulse 1s infinite; }
+        @keyframes pulse { 50% { opacity: 0.7; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @media print { .no-print { display: none !important; } }
+        .success-badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-weight: bold; font-size: 0.875rem; }
+        .grade-excellent { background: #dcfce7; color: #166534; }
+        .grade-good { background: #fef3c7; color: #92400e; }
+        .grade-pass { background: #dbeafe; color: #1e40af; }
+        .grade-fail { background: #fee2e2; color: #991b1b; }
+        .lang-switch {
+            position: fixed; top: 16px; left: 16px; z-index: 100;
+            background: white; padding: 6px; border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15); display: flex; gap: 4px;
+            border: 2px solid #dc2626;
+        }
+        [dir="ltr"] .lang-switch { left: auto; right: 16px; }
+        .lang-btn {
+            padding: 6px 14px; border-radius: 20px; cursor: pointer; font-weight: bold;
+            transition: all 0.3s; border: none; font-size: 0.875rem;
+            background: transparent; color: #6b7280;
+        }
+        .lang-btn.active { background: #dc2626; color: white; box-shadow: 0 2px 6px rgba(220,38,38,0.4); }
+        .lang-btn:hover:not(.active) { background: #fef2f2; color: #dc2626; }
+        .shuffle-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+            color: white; padding: 4px 12px; border-radius: 20px;
+            font-size: 0.75rem; font-weight: bold; margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        .math-display {
+            display: inline-block; direction: ltr;
+            font-family: 'Times New Roman', 'Cambria Math', serif;
+            font-size: 1.15em; font-style: italic;
+            padding: 2px 8px; background: #fef2f2;
+            border-radius: 6px; margin: 2px;
+            color: #991b1b; font-weight: 600; letter-spacing: 0.5px;
+        }
+        .save-indicator {
+            position: fixed; bottom: 20px; left: 20px; z-index: 200;
+            background: #10b981; color: white; padding: 8px 16px;
+            border-radius: 20px; font-size: 0.8rem; font-weight: bold;
+            opacity: 0; transition: opacity 0.3s; pointer-events: none;
+            box-shadow: 0 4px 12px rgba(16,185,129,0.4);
+        }
+        .save-indicator.show { opacity: 1; }
+        .formula-box {
+            background: #fef2f2; border: 2px solid #ef4444;
+            border-radius: 8px; padding: 12px; margin: 10px 0;
+            font-family: 'Times New Roman', serif;
+            direction: ltr; text-align: center;
+        }
+        .svg-graph {
+            display: block;
+            margin: 12px auto;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .graph-container { text-align: center; margin: 10px 0; }
+        .topic-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .topic-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-red-50 to-orange-50 text-gray-800 p-4 md:p-8 min-h-screen">
+
+    <div class="lang-switch no-print">
+        <button class="lang-btn active" onclick="setLanguage('ar')" id="btn-ar">عربي</button>
+        <button class="lang-btn" onclick="setLanguage('en')" id="btn-en">EN</button>
+    </div>
+
+    <div id="saveIndicator" class="save-indicator">💾 <span data-ar="تم الحفظ" data-en="Saved">تم الحفظ</span></div>
+
+    <!-- ==================== DASHBOARD ==================== -->
+    <div id="dashboard" class="active-section">
+        <div class="max-w-6xl mx-auto">
+            <div class="bg-gradient-to-r from-red-600 to-orange-600 text-white p-8 rounded-3xl shadow-2xl mb-8 text-center">
+                <h1 class="text-3xl md:text-4xl font-bold mb-3"> مراجعة شاملة قبل الميد تيرم</h1>
+                <p class="text-xl opacity-90" data-ar="الصف 12 متقدم - الكهرباء الساكنة" data-en="Grade 12 Advanced - Electrostatics">الصف 12 متقدم - الكهرباء الساكنة</p>
+                <p class="text-sm opacity-75 mt-2">Mr. Mohammed Hesham ⚡</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-lg mb-8">
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1" data-ar="😊 الاسم" data-en="😊 Name">😊 الاسم</label>
+                        <input type="text" id="studentName" class="w-full border-2 border-red-200 rounded-lg px-4 py-2 focus:border-red-500 focus:outline-none" placeholder="اكتب اسمك">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1" data-ar="🏫 الشعبة" data-en="🏫 Class">🏫 الشعبة</label>
+                        <input type="text" id="studentClass" class="w-full border-2 border-red-200 rounded-lg px-4 py-2 focus:border-red-500 focus:outline-none" placeholder="الشعبة">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-1" data-ar="📅 التاريخ" data-en="📅 Date">📅 التاريخ</label>
+                        <input type="text" id="examDate" class="w-full border-2 border-red-200 rounded-lg px-4 py-2 focus:border-red-500 focus:outline-none">
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center" data-ar="📚 اختر موضوع المراجعة" data-en="📚 Choose Review Topic">📚 اختر موضوع المراجعة</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="topics-grid"></div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-lg">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 text-center" data-ar="📊 إحصائيات التقدم" data-en="📊 Progress Statistics">📊 إحصائيات التقدم</h3>
+                <div class="grid md:grid-cols-4 gap-4 text-center">
+                    <div class="bg-green-50 p-4 rounded-xl">
+                        <div class="text-3xl font-bold text-green-600" id="stat-completed">0</div>
+                        <div class="text-sm text-gray-600" data-ar="امتحانات مكتملة" data-en="Completed">امتحانات مكتملة</div>
+                    </div>
+                    <div class="bg-red-50 p-4 rounded-xl">
+                        <div class="text-3xl font-bold text-red-600" id="stat-total">6</div>
+                        <div class="text-sm text-gray-600" data-ar="إجمالي المواضيع" data-en="Total Topics">إجمالي المواضيع</div>
+                    </div>
+                    <div class="bg-blue-50 p-4 rounded-xl">
+                        <div class="text-3xl font-bold text-blue-600" id="stat-avg">0%</div>
+                        <div class="text-sm text-gray-600" data-ar="متوسط الدرجات" data-en="Average Score">متوسط الدرجات</div>
+                    </div>
+                    <div class="bg-orange-50 p-4 rounded-xl">
+                        <div class="text-3xl font-bold text-orange-600" id="stat-time">0</div>
+                        <div class="text-sm text-gray-600" data-ar="دقائق دراسة" data-en="Study Minutes">دقائق دراسة</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== EXAM CONTAINER ==================== -->
+    <div id="exam-container" class="hidden-section p-4 md:p-8">
+        <div class="max-w-4xl mx-auto mb-4 no-print">
+            <button onclick="goToDashboard()" class="bg-gray-700 hover:bg-gray-900 text-white px-6 py-2 rounded-xl font-medium transition shadow cursor-pointer">
+                ← <span data-ar="العودة للرئيسية" data-en="Back to Dashboard">العودة للرئيسية</span>
+            </button>
+        </div>
+
+        <div class="max-w-4xl mx-auto mb-4 text-center no-print">
+            <div class="bg-white p-4 rounded-2xl shadow-md inline-block border-2 border-red-100">
+                <span class="text-gray-600 ml-2" data-ar="⏰ الوقت المتبقي:" data-en="⏰ Time Remaining:">⏰ الوقت المتبقي:</span>
+                <span id="timer" class="text-2xl font-bold text-red-600 font-mono">60:00</span>
+                <span id="exam-badge" class="shuffle-badge inline-block bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold mr-2">-</span>
+            </div>
+        </div>
+
+        <div class="max-w-4xl mx-auto mb-6 flex flex-wrap gap-3 justify-center no-print">
+            <button onclick="toggleAnswers()" class="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-xl font-medium transition shadow cursor-pointer" data-ar="👀 إظهار / إخفاء الإجابات" data-en="👀 Show / Hide Answers">👀 إظهار / إخفاء الإجابات</button>
+            <button onclick="window.print()" class="bg-gray-700 hover:bg-gray-900 text-white px-5 py-2 rounded-xl font-medium transition shadow cursor-pointer" data-ar="🖨️ طباعة" data-en="️ Print">🖨️ طباعة</button>
+            <button onclick="reshuffleExam()" class="bg-gradient-to-r from-red-600 to-orange-600 text-white px-5 py-2 rounded-xl font-medium transition shadow cursor-pointer" data-ar="🔄 أسئلة جديدة" data-en="🔄 New Questions">🔄 أسئلة جديدة</button>
+            <button onclick="clearProgress()" class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl font-medium transition shadow cursor-pointer" data-ar="🗑️ مسح التقدم" data-en="🗑️ Clear Progress">🗑️ مسح التقدم</button>
+        </div>
+
+        <header class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-lg mb-8 border-4 border-red-400">
+            <div class="text-center">
+                <h1 id="exam-title" class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">-</h1>
+                <h2 id="exam-subtitle" class="text-lg text-red-600 font-semibold">-</h2>
+                <p id="exam-description" class="text-sm text-gray-600 mt-2">-</p>
+                <p id="exam-info" class="text-xs text-green-600 mt-2 font-semibold">-</p>
+            </div>
+        </header>
+
+        <div id="formula-section" class="max-w-4xl mx-auto mb-6 bg-white p-4 rounded-xl shadow-md border-2 border-red-200 no-print">
+            <h3 class="font-bold text-lg mb-3 text-red-700 text-center" data-ar="📐 الصيغ الأساسية" data-en="📐 Key Formulae">📐 الصيغ الأساسية</h3>
+            <div class="grid md:grid-cols-2 gap-3 text-sm" id="formula-boxes"></div>
+        </div>
+
+        <main class="max-w-4xl mx-auto space-y-8" id="exam-content"></main>
+
+        <div class="text-center no-print pb-8 mt-8">
+            <button onclick="gradeExam()" class="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white text-lg px-10 py-4 rounded-2xl font-bold shadow-xl transition transform hover:scale-105 cursor-pointer" data-ar="🎯 صحح إجاباتي!" data-en="🎯 Grade My Answers!">🎯 صحح إجاباتي!</button>
+        </div>
+
+        <div id="results-panel" class="max-w-4xl mx-auto mt-8 bg-white p-8 rounded-2xl shadow-2xl border-4 border-red-400 hidden no-print">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center" data-ar=" نتيجتك يا بطل! 🏆" data-en="🏆 Your Results, Champion! ">🏆 نتيجتك يا بطل! 🏆</h2>
+            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-red-50 p-4 rounded-xl text-center"><p data-ar="😊 الاسم" data-en="😊 Name">😊 الاسم</p><p id="res-name" class="font-bold text-xl text-red-700">-</p></div>
+                <div class="bg-orange-50 p-4 rounded-xl text-center"><p data-ar="📅 التاريخ" data-en="📅 Date">📅 التاريخ</p><p id="res-date" class="font-bold text-xl text-orange-700">-</p></div>
+                <div class="bg-red-50 p-4 rounded-xl text-center"><p data-ar="🌟 المجموع" data-en=" Score">🌟 المجموع</p><p id="res-total" class="font-bold text-3xl text-red-600">0 / 100</p></div>
+            </div>
+            <div class="text-center mb-6">
+                <span id="success-badge" class="success-badge grade-excellent">-</span>
+                <p id="success-percent" class="text-4xl font-bold text-red-600 mt-2">0%</p>
+            </div>
+            <div class="bg-gray-50 p-6 rounded-xl mb-6">
+                <h3 class="font-bold text-lg mb-4 text-gray-800" data-ar="📊 أدائك في كل قسم:" data-en="📊 Your Performance:">📊 أدائك في كل قسم:</h3>
+                <div class="space-y-3" id="sections-performance"></div>
+            </div>
+            <div class="text-center mb-6">
+                <button id="sendEmailBtn" onclick="sendResultsToEmail()" class="bg-gradient-to-r from-red-600 to-orange-600 text-white text-lg px-8 py-3 rounded-2xl font-bold shadow-xl transition cursor-pointer" data-ar="📧 أرسل النتيجة للمعلم" data-en="📧 Send Results to Teacher"> أرسل النتيجة للمعلم</button>
+                <p id="emailStatus" class="text-sm mt-2 text-center font-medium"></p>
+            </div>
+        </div>
+
+        <footer class="max-w-4xl mx-auto mt-10 mb-8 text-center text-gray-500 text-sm no-print">
+            © <span data-ar="مراجعة شاملة - الكهرباء الساكنة" data-en="Comprehensive Review - Electrostatics">مراجعة شاملة - الكهرباء الساكنة</span> | Mr. Mohammed Hesham ⚡
+        </footer>
+    </div>
+
+<script>
+// ==================== EmailJS Settings ====================
+const PUBLIC_KEY = "Rb3Lq8tXaFmc5YHUH";
+const SERVICE_ID = "service_w15m64i";
+const TEMPLATE_ID = "template_5b0u2tq";
+const TARGET_EMAIL = "mohammedhesham872@gmail.com";
+emailjs.init(PUBLIC_KEY);
+
+// ==================== Global State ====================
+let currentExam = null;
+let currentLang = 'ar';
+let currentSeed = null;
+let answersVisible = false;
+let timeRemaining = 0;
+let timerInterval = null;
+let examData = null;
+let correctAnswersMap = {};
+let saveIndicatorTimeout = null;
+
+// ==================== Mulberry32 RNG ====================
+function mulberry32(a) {
+    return function() {
+        var t = a += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+}
+let rng = null;
+
+// ==================== SVG Graphs ====================
+const svgGraphs = {
+    charge_quantization: `<svg class="svg-graph" width="340" height="260" viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="330" height="250" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+        <text x="170" y="25" text-anchor="middle" font-size="14" fill="#991b1b" font-weight="bold">⚡ تكميم الشحنة</text>
+        <text x="170" y="50" text-anchor="middle" font-size="12" fill="#991b1b" font-family="'Times New Roman', serif">q = n·e</text>
+        <circle cx="100" cy="120" r="30" fill="#dc2626" opacity="0.3"/>
+        <text x="100" y="125" text-anchor="middle" font-size="14" fill="#dc2626" font-weight="bold">-</text>
+        <text x="100" y="170" text-anchor="middle" font-size="11" fill="#991b1b">إلكترون</text>
+        <circle cx="240" cy="120" r="30" fill="#3b82f6" opacity="0.3"/>
+        <text x="240" y="125" text-anchor="middle" font-size="14" fill="#3b82f6" font-weight="bold">+</text>
+        <text x="240" y="170" text-anchor="middle" font-size="11" fill="#991b1b">بروتون</text>
+        <text x="170" y="220" text-anchor="middle" font-size="11" fill="#991b1b">e = 1.6 × 10⁻¹⁹ C</text>
+    </svg>`,
+    coulomb_law: `<svg class="svg-graph" width="340" height="260" viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="330" height="250" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+        <text x="170" y="25" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">⚡ قانون كولوم</text>
+        <text x="170" y="50" text-anchor="middle" font-size="12" fill="#92400e" font-family="'Times New Roman', serif">F = k|q₁q₂|/r²</text>
+        <circle cx="100" cy="150" r="25" fill="#dc2626" opacity="0.4"/>
+        <text x="100" y="155" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">q₁</text>
+        <circle cx="240" cy="150" r="25" fill="#dc2626" opacity="0.4"/>
+        <text x="240" y="155" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">q₂</text>
+        <line x1="125" y1="150" x2="215" y2="150" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
+        <text x="170" y="145" text-anchor="middle" font-size="11" fill="#f59e0b">r</text>
+        <path d="M 130 130 Q 170 110 210 130" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow)"/>
+        <path d="M 210 170 Q 170 190 130 170" fill="none" stroke="#dc2626" stroke-width="2"/>
+        <text x="170" y="220" text-anchor="middle" font-size="11" fill="#92400e">k = 9 × 10⁹ N·m²/C²</text>
+    </svg>`,
+    charging_methods: `<svg class="svg-graph" width="340" height="280" viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="330" height="270" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+        <text x="170" y="25" text-anchor="middle" font-size="14" fill="#1e40af" font-weight="bold">⚡ طرق الشحن</text>
+        <rect x="20" y="50" width="90" height="80" rx="8" fill="#3b82f6" opacity="0.2"/>
+        <text x="65" y="90" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">الدلك</text>
+        <text x="65" y="110" text-anchor="middle" font-size="9" fill="#1e40af">Friction</text>
+        <rect x="125" y="50" width="90" height="80" rx="8" fill="#10b981" opacity="0.2"/>
+        <text x="170" y="90" text-anchor="middle" font-size="11" fill="#065f46" font-weight="bold">التوصيل</text>
+        <text x="170" y="110" text-anchor="middle" font-size="9" fill="#065f46">Conduction</text>
+        <rect x="230" y="50" width="90" height="80" rx="8" fill="#f59e0b" opacity="0.2"/>
+        <text x="275" y="90" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">الحث</text>
+        <text x="275" y="110" text-anchor="middle" font-size="9" fill="#92400e">Induction</text>
+        <text x="170" y="180" text-anchor="middle" font-size="11" fill="#1e40af">التأريض: نقل الشحنات للأرض</text>
+        <text x="170" y="210" text-anchor="middle" font-size="11" fill="#1e40af">المكشاف الكهربائي: كشف الشحنات</text>
+        <text x="170" y="240" text-anchor="middle" font-size="11" fill="#1e40af">الشحن بالحث يعطي شحنة معاكسة</text>
+    </svg>`,
+    electroscope: `<svg class="svg-graph" width="300" height="320" viewBox="0 0 300 320" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="290" height="310" rx="12" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+        <text x="150" y="25" text-anchor="middle" font-size="14" fill="#065f46" font-weight="bold">🔬 المكشاف الكهربائي</text>
+        <circle cx="150" cy="70" r="20" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+        <line x1="150" y1="90" x2="150" y2="200" stroke="#6b7280" stroke-width="3"/>
+        <line x1="150" y1="200" x2="120" y2="260" stroke="#6b7280" stroke-width="2"/>
+        <line x1="150" y1="200" x2="180" y2="260" stroke="#6b7280" stroke-width="2"/>
+        <rect x="100" y="260" width="100" height="40" rx="5" fill="#e5e7eb" stroke="#9ca3af" stroke-width="2"/>
+        <text x="150" y="285" text-anchor="middle" font-size="10" fill="#374151">ورقتان ذهبيتان</text>
+        <text x="150" y="150" text-anchor="middle" font-size="10" fill="#374151">ساق معدنية</text>
+        <text x="150" y="50" text-anchor="middle" font-size="10" fill="#374151">كرة معدنية</text>
+        <text x="150" y="310" text-anchor="middle" font-size="11" fill="#065f46">تنفرج الأوراق = وجود شحنة</text>
+    </svg>`,
+    equilibrium: `<svg class="svg-graph" width="340" height="260" viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="330" height="250" rx="12" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+        <text x="170" y="25" text-anchor="middle" font-size="14" fill="#6b21a8" font-weight="bold">⚖️ الإتزان الكهروستاتيكي</text>
+        <circle cx="80" cy="130" r="20" fill="#dc2626" opacity="0.4"/>
+        <text x="80" y="135" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">q₁</text>
+        <circle cx="170" cy="130" r="15" fill="#3b82f6" opacity="0.4"/>
+        <text x="170" y="135" text-anchor="middle" font-size="11" fill="#3b82f6" font-weight="bold">q</text>
+        <circle cx="260" cy="130" r="20" fill="#dc2626" opacity="0.4"/>
+        <text x="260" y="135" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">q₂</text>
+        <line x1="100" y1="130" x2="155" y2="130" stroke="#9333ea" stroke-width="2"/>
+        <line x1="185" y1="130" x2="240" y2="130" stroke="#9333ea" stroke-width="2"/>
+        <text x="127" y="120" text-anchor="middle" font-size="10" fill="#9333ea">r₁</text>
+        <text x="212" y="120" text-anchor="middle" font-size="10" fill="#9333ea">r₂</text>
+        <text x="170" y="200" text-anchor="middle" font-size="11" fill="#6b21a8">F₁ = F₂ عند الإتزان</text>
+        <text x="170" y="230" text-anchor="middle" font-size="11" fill="#6b21a8">المحصلة = صفر</text>
+    </svg>`,
+    superposition: `<svg class="svg-graph" width="340" height="280" viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+        <rect x="5" y="5" width="330" height="270" rx="12" fill="#fef2f2" stroke="#dc2626" stroke-width="2"/>
+        <text x="170" y="25" text-anchor="middle" font-size="14" fill="#991b1b" font-weight="bold">📐 مبدأ التراكب</text>
+        <circle cx="170" cy="140" r="15" fill="#fbbf24" stroke="#f59e0b" stroke-width="2"/>
+        <text x="170" y="145" text-anchor="middle" font-size="11" fill="#991b1b" font-weight="bold">q</text>
+        <circle cx="80" cy="80" r="18" fill="#dc2626" opacity="0.4"/>
+        <text x="80" y="85" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">q₁</text>
+        <circle cx="260" cy="80" r="18" fill="#dc2626" opacity="0.4"/>
+        <text x="260" y="85" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">q₂</text>
+        <circle cx="170" cy="220" r="18" fill="#dc2626" opacity="0.4"/>
+        <text x="170" y="225" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">q₃</text>
+        <line x1="95" y1="90" x2="155" y2="130" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="245" y1="90" x2="185" y2="130" stroke="#dc2626" stroke-width="2"/>
+        <line x1="170" y1="205" x2="170" y2="155" stroke="#dc2626" stroke-width="2"/>
+        <text x="170" y="260" text-anchor="middle" font-size="11" fill="#991b1b">F_R = F₁ + F₂ + F₃ (جمع متجهي)</text>
+    </svg>`
+};
+
+// ==================== EXAMS DATABASE ====================
+const EXAMS_DB = {
+    charge_quantization: {
+        id: 'charge_quantization',
+        title: { ar: '⚡ الشحنة الكهربية وتكميمها', en: '⚡ Electric Charge & Quantization' },
+        subtitle: { ar: 'تكميم الشحنة، تركيب الذرة، حفظ الشحنة', en: 'Charge quantization, atomic structure, charge conservation' },
+        description: { ar: 'مفاهيم أساسية عن الشحنة الكهربية وتكميمها', en: 'Fundamental concepts of electric charge and quantization' },
+        duration: 3600,
+        color: 'from-red-500 to-rose-600',
+        icon: '⚡',
+        formulae: [
+            { ar: '<strong>q = n·e</strong> حيث n عدد صحيح', en: '<strong>q = n·e</strong> where n is integer' },
+            { ar: '<strong>e = 1.6 × 10⁻¹⁹ C</strong>', en: '<strong>e = 1.6 × 10¹⁹ C</strong>' },
+            { ar: '<strong>q = e(Np - Ne)</strong>', en: '<strong>q = e(Np - Ne)</strong>' },
+            { ar: '<strong>الشحنة محفوظة</strong> في النظام المعزول', en: '<strong>Charge conserved</strong> in isolated system' }
+        ],
+        sections: [
+            {
+                title: { ar: '🔹 تكميم الشحنة', en: '🔹 Charge Quantization' },
+                questions: [
+                    { q: { ar: 'أي من الآتي يمكن أن تكون شحنة جسم؟', en: 'Which can be the charge of an object?' },
+                      svg: svgGraphs.charge_quantization,
+                      options: [{ ar: '5e', en: '5e' }, { ar: '2.5e', en: '2.5e' }, { ar: '1.5e', en: '1.5e' }, { ar: '0.5e', en: '0.5e' }],
+                      correct: 0, answer: { ar: 'الشحنة = ne حيث n عدد صحيح. 5e فقط مقبولة', en: 'Charge = ne where n is integer. Only 5e is valid' } },
+                    { q: { ar: 'جسم شحنته -3e. ماذا يعني ذلك؟', en: 'Object has charge -3e. What does this mean?' },
+                      options: [{ ar: 'اكتسب 3 إلكترونات', en: 'Gained 3 electrons' }, { ar: 'فقد 3 إلكترونات', en: 'Lost 3 electrons' }, { ar: 'اكتسب 3 بروتونات', en: 'Gained 3 protons' }, { ar: 'فقد 3 بروتونات', en: 'Lost 3 protons' }],
+                      correct: 0, answer: { ar: 'الشحنة السالبة تعني اكتساب إلكترونات', en: 'Negative charge means gained electrons' } },
+                    { q: { ar: 'شحنة البروتون:', en: 'Charge of proton:' },
+                      options: [{ ar: '+1.6 × 10⁻¹⁹ C', en: '+1.6 × 10⁻¹⁹ C' }, { ar: '-1.6 × 10⁻¹⁹ C', en: '-1.6 × 10⁻¹⁹ C' }, { ar: '0', en: '0' }, { ar: '+3.2 × 10⁻¹⁹ C', en: '+3.2 × 10¹⁹ C' }],
+                      correct: 0, answer: { ar: 'شحنة البروتون موجبة وتساوي +e', en: 'Proton charge is positive and equals +e' } },
+                    { q: { ar: 'أي مما يلي يدل على تكميم الشحنة؟', en: 'Which indicates charge quantization?' },
+                      options: [{ ar: 'الشحنة دائماً مضاعفات صحيحة لـ e', en: 'Charge always integer multiples of e' }, { ar: 'الشحنة يمكن أن تكون أي قيمة', en: 'Charge can be any value' }, { ar: 'الشحنة تتغير باستمرار', en: 'Charge changes continuously' }, { ar: 'الشحنة تعتمد على المادة', en: 'Charge depends on material' }],
+                      correct: 0, answer: { ar: 'تكميم الشحنة: q = ne حيث n عدد صحيح', en: 'Charge quantization: q = ne where n is integer' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 تركيب الذرة', en: '🔹 Atomic Structure' },
+                questions: [
+                    { q: { ar: 'الذرة المتعادلة كهربائياً:', en: 'Electrically neutral atom:' },
+                      options: [{ ar: 'عدد البروتونات = عدد الإلكترونات', en: 'Number of protons = number of electrons' }, { ar: 'عدد البروتونات > عدد الإلكترونات', en: 'Protons > electrons' }, { ar: 'عدد الإلكترونات > عدد البروتونات', en: 'Electrons > protons' }, { ar: 'لا تحتوي على إلكترونات', en: 'Contains no electrons' }],
+                      correct: 0, answer: { ar: 'الذرة المتعادلة: عدد البروتونات = عدد الإلكترونات', en: 'Neutral atom: protons = electrons' } },
+                    { q: { ar: 'الأيون الموجب يتكون عندما:', en: 'Positive ion forms when:' },
+                      options: [{ ar: 'تفقد الذرة إلكترونات', en: 'Atom loses electrons' }, { ar: 'تكتسب الذرة إلكترونات', en: 'Atom gains electrons' }, { ar: 'تفقد الذرة بروتونات', en: 'Atom loses protons' }, { ar: 'تكتسب الذرة نيوترونات', en: 'Atom gains neutrons' }],
+                      correct: 0, answer: { ar: 'الأيون الموجب: فقد إلكترونات', en: 'Positive ion: lost electrons' } },
+                    { q: { ar: 'الشحنة الأولية (e) تساوي:', en: 'Elementary charge (e) equals:' },
+                      options: [{ ar: '1.6 × 10⁻¹⁹ C', en: '1.6 × 10⁻¹⁹ C' }, { ar: '1.6 × 10⁻⁹ C', en: '1.6 × 10⁻ C' }, { ar: '9 × 10⁹ C', en: '9 × 10⁹ C' }, { ar: '1.6 × 10¹⁹ C', en: '1.6 × 10¹⁹ C' }],
+                      correct: 0, answer: { ar: 'e = 1.6 × 10⁻¹⁹ C', en: 'e = 1.6 × 10¹⁹ C' } },
+                    { q: { ar: 'جسم شحنته +4.8 × 10⁻¹⁹ C. عدد الإلكترونات المفقودة؟', en: 'Object charge +4.8 × 10⁻¹⁹ C. Number of electrons lost?' },
+                      options: [{ ar: '3', en: '3' }, { ar: '2', en: '2' }, { ar: '4', en: '4' }, { ar: '5', en: '5' }],
+                      correct: 0, answer: { ar: 'n = q/e = 4.8×10⁻¹⁹/1.6×10⁻¹⁹ = 3', en: 'n = q/e = 4.8×10⁻¹⁹/1.6×10⁻¹⁹ = 3' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 حفظ الشحنة', en: '🔹 Charge Conservation' },
+                questions: [
+                    { q: { ar: 'مبدأ حفظ الشحنة يعني:', en: 'Charge conservation principle means:' },
+                      options: [{ ar: 'الشحنة الكلية في نظام معزول ثابتة', en: 'Total charge in isolated system is constant' }, { ar: 'الشحنة يمكن أن تُفنى', en: 'Charge can be destroyed' }, { ar: 'الشحنة يمكن أن تُستحدث', en: 'Charge can be created' }, { ar: 'الشحنة تتغير مع الزمن', en: 'Charge changes with time' }],
+                      correct: 0, answer: { ar: 'الشحنة لا تُستحدث ولا تُفنى، فقط تنتقل', en: 'Charge cannot be created or destroyed, only transferred' } },
+                    { q: { ar: 'كرتان متماثلتان: الأولى شحنتها +6e والثانية -2e. بعد التلامس، شحنة كل كرة؟', en: 'Two identical spheres: first +6e, second -2e. After contact, charge of each?' },
+                      options: [{ ar: '+2e', en: '+2e' }, { ar: '+4e', en: '+4e' }, { ar: '+8e', en: '+8e' }, { ar: '0', en: '0' }],
+                      correct: 0, answer: { ar: 'المجموع = +4e. بعد التلامس: +4e/2 = +2e لكل كرة', en: 'Total = +4e. After contact: +4e/2 = +2e each' } },
+                    { q: { ar: 'عند دلك جسمين معاً:', en: 'When rubbing two objects together:' },
+                      options: [{ ar: 'مجموع شحنتيهما يبقى ثابتاً', en: 'Sum of their charges remains constant' }, { ar: 'تزداد الشحنة الكلية', en: 'Total charge increases' }, { ar: 'تقل الشحنة الكلية', en: 'Total charge decreases' }, { ar: 'تصبح الشحنة صفراً', en: 'Charge becomes zero' }],
+                      correct: 0, answer: { ar: 'حفظ الشحنة: المجموع يبقى ثابتاً', en: 'Charge conservation: sum remains constant' } },
+                    { q: { ar: 'جسم متعادل اكتسب 5 إلكترونات. شحنته النهائية؟', en: 'Neutral object gained 5 electrons. Final charge?' },
+                      options: [{ ar: '-5e', en: '-5e' }, { ar: '+5e', en: '+5e' }, { ar: '0', en: '0' }, { ar: '-10e', en: '-10e' }],
+                      correct: 0, answer: { ar: 'اكتساب إلكترونات → شحنة سالبة: -5e', en: 'Gaining electrons → negative charge: -5e' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 حسابات الشحنة', en: '🔹 Charge Calculations' },
+                questions: [
+                    { q: { ar: 'كم إلكترون في شحنة -1 C؟', en: 'How many electrons in -1 C charge?' },
+                      options: [{ ar: '6.25 × 10¹⁸', en: '6.25 × 10¹⁸' }, { ar: '1.6 × 10¹⁹', en: '1.6 × 10¹⁹' }, { ar: '6.25 × 10¹⁹', en: '6.25 × 10¹⁹' }, { ar: '1.6 × 10¹⁸', en: '1.6 × 10¹⁸' }],
+                      correct: 0, answer: { ar: 'n = 1/1.6×10⁻¹⁹ = 6.25×10¹⁸', en: 'n = 1/1.6×10⁻¹ = 6.25×10¹' } },
+                    { q: { ar: 'شحنة جسم تحتوي على 10¹² إلكترون زائد:', en: 'Charge of object with 10¹² excess electrons:' },
+                      options: [{ ar: '-1.6 × 10⁻⁷ C', en: '-1.6 × 10⁻⁷ C' }, { ar: '+1.6 × 10⁷ C', en: '+1.6 × 10⁻⁷ C' }, { ar: '-1.6 × 10⁻¹⁹ C', en: '-1.6 × 10⁻¹⁹ C' }, { ar: '+1.6 × 10⁻¹⁹ C', en: '+1.6 × 10⁻¹⁹ C' }],
+                      correct: 0, answer: { ar: 'q = ne = 10¹² × 1.6×10⁻¹⁹ = 1.6×10⁷ C (سالبة)', en: 'q = ne = 10¹² × 1.6×10⁻¹⁹ = 1.6×10⁻⁷ C (negative)' } },
+                    { q: { ar: 'ذرة فقدت 3 إلكترونات. شحنتها:', en: 'Atom lost 3 electrons. Its charge:' },
+                      options: [{ ar: '+4.8 × 10⁻¹⁹ C', en: '+4.8 × 10⁻¹⁹ C' }, { ar: '-4.8 × 10⁻¹⁹ C', en: '-4.8 × 10⁻¹⁹ C' }, { ar: '+1.6 × 10⁻¹⁹ C', en: '+1.6 × 10⁻¹⁹ C' }, { ar: '-1.6 × 10⁻¹⁹ C', en: '-1.6 × 10⁻¹⁹ C' }],
+                      correct: 0, answer: { ar: 'فقد 3 إلكترونات → +3e = +4.8×10⁻¹⁹ C', en: 'Lost 3 electrons → +3e = +4.8×10⁻¹⁹ C' } },
+                    { q: { ar: 'أي شحنة غير ممكنة جسدياً؟', en: 'Which charge is physically impossible?' },
+                      options: [{ ar: '2.4 × 10⁻¹⁹ C', en: '2.4 × 10⁻¹⁹ C' }, { ar: '3.2 × 10⁻¹⁹ C', en: '3.2 × 10⁻¹⁹ C' }, { ar: '4.8 × 10⁻¹⁹ C', en: '4.8 × 10⁻¹⁹ C' }, { ar: '1.6 × 10⁻¹⁹ C', en: '1.6 × 10⁻¹ C' }],
+                      correct: 0, answer: { ar: '2.4×10⁻¹⁹/1.6×10⁻¹⁹ = 1.5 (ليس عدداً صحيحاً)', en: '2.4×10⁻¹⁹/1.6×10⁻¹⁹ = 1.5 (not integer)' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 تطبيقات', en: '🔹 Applications' },
+                questions: [
+                    { q: { ar: 'عند شحن جسم بالدلك:', en: 'When charging by friction:' },
+                      options: [{ ar: 'تنتقل الإلكترونات بين الجسمين', en: 'Electrons transfer between objects' }, { ar: 'تنتقل البروتونات', en: 'Protons transfer' }, { ar: 'تنتقل النيوترونات', en: 'Neutrons transfer' }, { ar: 'لا تنتقل جسيمات', en: 'No particles transfer' }],
+                      correct: 0, answer: { ar: 'الدلك: انتقال الإلكترونات فقط', en: 'Friction: only electrons transfer' } },
+                    { q: { ar: 'جسمان متعادلان دُلِكا معاً. الجسم الأول أصبح شحنته -3e. شحنة الثاني؟', en: 'Two neutral objects rubbed. First becomes -3e. Charge of second?' },
+                      options: [{ ar: '+3e', en: '+3e' }, { ar: '-3e', en: '-3e' }, { ar: '0', en: '0' }, { ar: '+6e', en: '+6e' }],
+                      correct: 0, answer: { ar: 'حفظ الشحنة: المجموع = 0. الثاني = +3e', en: 'Charge conservation: sum = 0. Second = +3e' } },
+                    { q: { ar: 'الموصلات تختلف عن العوازل في:', en: 'Conductors differ from insulators in:' },
+                      options: [{ ar: 'حركة الإلكترونات الحرة', en: 'Movement of free electrons' }, { ar: 'عدد البروتونات', en: 'Number of protons' }, { ar: 'الكتلة', en: 'Mass' }, { ar: 'الحجم', en: 'Volume' }],
+                      correct: 0, answer: { ar: 'الموصلات تحتوي على إلكترونات حرة تتحرك بسهولة', en: 'Conductors have free electrons that move easily' } },
+                    { q: { ar: 'شحنة النيترون:', en: 'Charge of neutron:' },
+                      options: [{ ar: '0', en: '0' }, { ar: '+1.6 × 10⁻¹⁹ C', en: '+1.6 × 10⁻¹⁹ C' }, { ar: '-1.6 × 10⁻¹⁹ C', en: '-1.6 × 10⁻¹⁹ C' }, { ar: '+3.2 × 10⁻¹⁹ C', en: '+3.2 × 10⁻¹⁹ C' }],
+                      correct: 0, answer: { ar: 'النيوترون متعادل كهربائياً', en: 'Neutron is electrically neutral' } }
+                ]
+            }
+        ]
+    },
+
+    coulomb_law: {
+        id: 'coulomb_law',
+        title: { ar: ' قانون كولوم', en: '⚡ Coulomb\'s Law' },
+        subtitle: { ar: 'القوة الكهروستاتيكية بين الشحنات', en: 'Electrostatic force between charges' },
+        description: { ar: 'حساب القوة بين الشحنات وتأثير المسافة والشحنة', en: 'Calculating force between charges and effects of distance and charge' },
+        duration: 3600,
+        color: 'from-orange-500 to-amber-600',
+        icon: '⚡',
+        formulae: [
+            { ar: '<strong>F = k|q₁q₂|/r²</strong>', en: '<strong>F = k|q₁q₂|/r²</strong>' },
+            { ar: '<strong>k = 9 × 10⁹ N·m²/C²</strong>', en: '<strong>k = 9 × 10⁹ N·m²/C²</strong>' },
+            { ar: '<strong>F ∝ 1/r²</strong>', en: '<strong>F ∝ 1/r²</strong>' },
+            { ar: '<strong>F ∝ |q₁q₂|</strong>', en: '<strong>F ∝ |q₁q₂|</strong>' }
+        ],
+        sections: [
+            {
+                title: { ar: '🔹 حساب القوة', en: '🔹 Force Calculation' },
+                questions: [
+                    { q: { ar: 'شحنتان q₁=2μC, q₂=3μC على بعد 0.1m. القوة بينهما؟', en: 'Charges q₁=2μC, q₂=3μC at distance 0.1m. Force between them?' },
+                      svg: svgGraphs.coulomb_law,
+                      options: [{ ar: '5.4 N', en: '5.4 N' }, { ar: '54 N', en: '54 N' }, { ar: '0.54 N', en: '0.54 N' }, { ar: '540 N', en: '540 N' }],
+                      correct: 0, answer: { ar: 'F = 9×10⁹ × 2×10⁻ × 3×10⁻⁶ / (0.1)² = 5.4 N', en: 'F = 9×10 × 2×10⁻⁶ × 3×10⁻⁶ / (0.1)² = 5.4 N' } },
+                    { q: { ar: 'شحنتان متماثلتان q=1μC على بعد 0.2m. القوة؟', en: 'Two identical charges q=1μC at distance 0.2m. Force?' },
+                      options: [{ ar: '0.225 N', en: '0.225 N' }, { ar: '2.25 N', en: '2.25 N' }, { ar: '22.5 N', en: '22.5 N' }, { ar: '0.0225 N', en: '0.0225 N' }],
+                      correct: 0, answer: { ar: 'F = 9×10⁹ × (10⁶)² / (0.2)² = 0.225 N', en: 'F = 9×10⁹ × (10⁻⁶)² / (0.2)² = 0.225 N' } },
+                    { q: { ar: 'q₁=4μC, q₂=-2μC, r=0.3m. مقدار القوة؟', en: 'q₁=4μC, q₂=-2μC, r=0.3m. Force magnitude?' },
+                      options: [{ ar: '0.8 N', en: '0.8 N' }, { ar: '8 N', en: '8 N' }, { ar: '0.08 N', en: '0.08 N' }, { ar: '80 N', en: '80 N' }],
+                      correct: 0, answer: { ar: 'F = 9×10⁹ × 4×10⁻⁶ × 2×10⁻⁶ / (0.3)² = 0.8 N', en: 'F = 9×10⁹ × 4×10⁻⁶ × 2×10⁻⁶ / (0.3)² = 0.8 N' } },
+                    { q: { ar: 'نوع القوة بين شحنتين موجبتين:', en: 'Type of force between two positive charges:' },
+                      options: [{ ar: 'تنافر', en: 'Repulsion' }, { ar: 'تجاذب', en: 'Attraction' }, { ar: 'لا قوة', en: 'No force' }, { ar: 'تعتمد على المسافة', en: 'Depends on distance' }],
+                      correct: 0, answer: { ar: 'الشحنات المتشابهة تتنافر', en: 'Like charges repel' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 تأثير المسافة', en: ' Distance Effect' },
+                questions: [
+                    { q: { ar: 'شحنتان القوة بينهما 16N. إذا قُلّ البعد للنصف، القوة تصبح:', en: 'Two charges force 16N. If distance halved, force becomes:' },
+                      options: [{ ar: '64 N', en: '64 N' }, { ar: '32 N', en: '32 N' }, { ar: '8 N', en: '8 N' }, { ar: '4 N', en: '4 N' }],
+                      correct: 0, answer: { ar: 'F ∝ 1/r². عند r/2: F\' = 4F = 64N', en: 'F  1/r². At r/2: F\' = 4F = 64N' } },
+                    { q: { ar: 'القوة 10N عند مسافة r. عند مسافة 3r:', en: 'Force 10N at distance r. At distance 3r:' },
+                      options: [{ ar: '10/9 N ≈ 1.11 N', en: '10/9 N ≈ 1.11 N' }, { ar: '30 N', en: '30 N' }, { ar: '90 N', en: '90 N' }, { ar: '10/3 N', en: '10/3 N' }],
+                      correct: 0, answer: { ar: 'F\' = F/9 = 10/9 N', en: 'F\' = F/9 = 10/9 N' } },
+                    { q: { ar: 'القوة 20N. إذا تضاعف البعد:', en: 'Force 20N. If distance doubles:' },
+                      options: [{ ar: '5 N', en: '5 N' }, { ar: '10 N', en: '10 N' }, { ar: '40 N', en: '40 N' }, { ar: '80 N', en: '80 N' }],
+                      correct: 0, answer: { ar: 'F\' = F/4 = 5N', en: 'F\' = F/4 = 5N' } },
+                    { q: { ar: 'العلاقة بين القوة والمسافة:', en: 'Relationship between force and distance:' },
+                      options: [{ ar: 'عكسية مع مربع المسافة', en: 'Inversely proportional to square of distance' }, { ar: 'طردية مع المسافة', en: 'Directly proportional to distance' }, { ar: 'عكسية مع المسافة', en: 'Inversely proportional to distance' }, { ar: 'لا علاقة', en: 'No relationship' }],
+                      correct: 0, answer: { ar: 'F ∝ 1/r²', en: 'F ∝ 1/r²' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 تأثير الشحنة', en: '🔹 Charge Effect' },
+                questions: [
+                    { q: { ar: 'القوة 12N. إذا تضاعفت كل شحنة:', en: 'Force 12N. If each charge doubles:' },
+                      options: [{ ar: '48 N', en: '48 N' }, { ar: '24 N', en: '24 N' }, { ar: '6 N', en: '6 N' }, { ar: '12 N', en: '12 N' }],
+                      correct: 0, answer: { ar: 'F ∝ q₁q₂. عند مضاعفة كلاهما: F\' = 4F = 48N', en: 'F ∝ q₁q₂. Doubling both: F\' = 4F = 48N' } },
+                    { q: { ar: 'القوة 30N. إذا نصّفت إحدى الشحنات:', en: 'Force 30N. If one charge halved:' },
+                      options: [{ ar: '15 N', en: '15 N' }, { ar: '60 N', en: '60 N' }, { ar: '30 N', en: '30 N' }, { ar: '7.5 N', en: '7.5 N' }],
+                      correct: 0, answer: { ar: 'F\' = F/2 = 15N', en: 'F\' = F/2 = 15N' } },
+                    { q: { ar: 'القوة 8N. إذا تضاعفت شحنة واحدة ونُصّفت الأخرى:', en: 'Force 8N. If one charge doubles and other halves:' },
+                      options: [{ ar: '8 N', en: '8 N' }, { ar: '16 N', en: '16 N' }, { ar: '4 N', en: '4 N' }, { ar: '32 N', en: '32 N' }],
+                      correct: 0, answer: { ar: 'F\' = F × 2 × 0.5 = F = 8N', en: 'F\' = F × 2 × 0.5 = F = 8N' } },
+                    { q: { ar: 'العلاقة بين القوة والشحنة:', en: 'Relationship between force and charge:' },
+                      options: [{ ar: 'طردية مع حاصل ضرب الشحنتين', en: 'Directly proportional to product of charges' }, { ar: 'عكسية مع الشحنة', en: 'Inversely proportional to charge' }, { ar: 'طردية مع مجموع الشحنتين', en: 'Directly proportional to sum of charges' }, { ar: 'لا علاقة', en: 'No relationship' }],
+                      correct: 0, answer: { ar: 'F ∝ |q₁q₂|', en: 'F ∝ |q₁q₂|' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 مسائل مركبة', en: '🔹 Combined Problems' },
+                questions: [
+                    { q: { ar: 'القوة 100N. تضاعف البعد ونُصّفت كل شحنة:', en: 'Force 100N. Distance doubles and each charge halves:' },
+                      options: [{ ar: '6.25 N', en: '6.25 N' }, { ar: '25 N', en: '25 N' }, { ar: '50 N', en: '50 N' }, { ar: '12.5 N', en: '12.5 N' }],
+                      correct: 0, answer: { ar: 'F\' = F × (1/2)² × (1/2)² = F/16 = 6.25N', en: 'F\' = F × (1/2)² × (1/2)² = F/16 = 6.25N' } },
+                    { q: { ar: 'q₁=2q₂. القوة F. إذا أصبحت q₁=4q₂:', en: 'q₁=2q₂. Force F. If q₁=4q₂:' },
+                      options: [{ ar: '2F', en: '2F' }, { ar: 'F', en: 'F' }, { ar: '4F', en: '4F' }, { ar: 'F/2', en: 'F/2' }],
+                      correct: 0, answer: { ar: 'F  q₁q₂. q₁ تضاعفت → F\' = 2F', en: 'F ∝ q₁q₂. q₁ doubled → F\' = 2F' } },
+                    { q: { ar: 'القوة في الهواء F. في وسط ثابت عزله 4:', en: 'Force in air F. In medium with dielectric constant 4:' },
+                      options: [{ ar: 'F/4', en: 'F/4' }, { ar: '4F', en: '4F' }, { ar: 'F', en: 'F' }, { ar: 'F/2', en: 'F/2' }],
+                      correct: 0, answer: { ar: 'F\' = F/k = F/4', en: 'F\' = F/k = F/4' } },
+                    { q: { ar: 'شحنتان القوة بينهما 36N. البعد 0.2m. إذا أصبح 0.1m:', en: 'Two charges force 36N. Distance 0.2m. If becomes 0.1m:' },
+                      options: [{ ar: '144 N', en: '144 N' }, { ar: '72 N', en: '72 N' }, { ar: '18 N', en: '18 N' }, { ar: '9 N', en: '9 N' }],
+                      correct: 0, answer: { ar: 'البعد نصّف → القوة ×4: 36×4 = 144N', en: 'Distance halved → force ×4: 36×4 = 144N' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 تطبيقات', en: '🔹 Applications' },
+                questions: [
+                    { q: { ar: 'ثابت كولوم k في الفراغ:', en: 'Coulomb constant k in vacuum:' },
+                      options: [{ ar: '9 × 10⁹ N·m²/C²', en: '9 × 10⁹ N·m²/C²' }, { ar: '9 × 10⁻⁹ N·m²/C²', en: '9 × 10⁻⁹ N·m²/C²' }, { ar: '8.85 × 10⁻¹²', en: '8.85 × 10⁻¹²' }, { ar: '1.6 × 10⁻¹', en: '1.6 × 10⁻¹⁹' }],
+                      correct: 0, answer: { ar: 'k = 9 × 10⁹ N·m²/C²', en: 'k = 9 × 10⁹ N·m²/C²' } },
+                    { q: { ar: 'وحدة قياس الشحنة في SI:', en: 'SI unit of charge:' },
+                      options: [{ ar: 'Coulomb (C)', en: 'Coulomb (C)' }, { ar: 'Newton (N)', en: 'Newton (N)' }, { ar: 'Volt (V)', en: 'Volt (V)' }, { ar: 'Ampere (A)', en: 'Ampere (A)' }],
+                      correct: 0, answer: { ar: 'الشحنة تقاس بالكولوم (C)', en: 'Charge measured in Coulombs (C)' } },
+                    { q: { ar: 'القوة بين إلكترون وبروتون في ذرة الهيدروجين (r=5.3×10⁻¹¹m):', en: 'Force between electron and proton in hydrogen atom (r=5.3×10⁻¹¹m):' },
+                      options: [{ ar: '≈ 8.2 × 10⁻⁸ N', en: '≈ 8.2 × 10⁻ N' }, { ar: '≈ 8.2 × 10⁸ N', en: '≈ 8.2 × 10⁸ N' }, { ar: '≈ 9 × 10⁹ N', en: '≈ 9 × 10⁹ N' }, { ar: '≈ 1.6 × 10⁻¹⁹ N', en: '≈ 1.6 × 10⁻¹⁹ N' }],
+                      correct: 0, answer: { ar: 'F = k·e²/r² ≈ 8.2×10⁻⁸ N', en: 'F = k·e²/r² ≈ 8.2×10⁻⁸ N' } },
+                    { q: { ar: 'إذا كانت القوة تجاذبية، فالشحنتان:', en: 'If force is attractive, the charges:' },
+                      options: [{ ar: 'مختلفتان في الإشارة', en: 'Different signs' }, { ar: 'متشابهتان في الإشارة', en: 'Same signs' }, { ar: 'كلتاهما موجبة', en: 'Both positive' }, { ar: 'كلتاهما سالبة', en: 'Both negative' }],
+                      correct: 0, answer: { ar: 'التجاذب بين شحنات مختلفة الإشارة', en: 'Attraction between opposite charges' } }
+                ]
+            }
+        ]
+    },
+
+    charging_methods: {
+        id: 'charging_methods',
+        title: { ar: '🔬 طرق الشحن والتأريض', en: ' Charging Methods & Grounding' },
+        subtitle: { ar: 'الدلك، التوصيل، الحث، والمكشاف الكهربائي', en: 'Friction, conduction, induction, and electroscope' },
+        description: { ar: 'طرق شحن الأجسام والمكشاف الكهربائي', en: 'Methods of charging objects and electroscope' },
+        duration: 3600,
+        color: 'from-blue-500 to-cyan-600',
+        icon: '🔬',
+        formulae: [
+            { ar: '<strong>الدلك:</strong> انتقال إلكترونات', en: '<strong>Friction:</strong> Electron transfer' },
+            { ar: '<strong>التوصيل:</strong> تلامس مباشر', en: '<strong>Conduction:</strong> Direct contact' },
+            { ar: '<strong>الحث:</strong> شحنة معاكسة', en: '<strong>Induction:</strong> Opposite charge' },
+            { ar: '<strong>التأريض:</strong> نقل للأرض', en: '<strong>Grounding:</strong> Transfer to earth' }
+        ],
+        sections: [
+            {
+                title: { ar: ' الشحن بالدلك', en: '🔹 Charging by Friction' },
+                questions: [
+                    { q: { ar: 'عند دلك قضيب زجاجي بقطعة حرير:', en: 'When rubbing glass rod with silk:' },
+                      svg: svgGraphs.charging_methods,
+                      options: [{ ar: 'الزجاج يفقد إلكترونات ويصبح موجباً', en: 'Glass loses electrons and becomes positive' }, { ar: 'الزجاج يكتسب إلكترونات', en: 'Glass gains electrons' }, { ar: 'الحرير يصبح موجباً', en: 'Silk becomes positive' }, { ar: 'كلاهما يبقى متعادلاً', en: 'Both remain neutral' }],
+                      correct: 0, answer: { ar: 'الزجاج يفقد إلكترونات للحرير', en: 'Glass loses electrons to silk' } },
+                    { q: { ar: 'عند دلك قضيب إبونيت بصوف:', en: 'When rubbing ebonite rod with wool:' },
+                      options: [{ ar: 'الإبونيت يكتسب إلكترونات ويصبح سالباً', en: 'Ebonite gains electrons and becomes negative' }, { ar: 'الإبونيت يفقد إلكترونات', en: 'Ebonite loses electrons' }, { ar: 'الصوف يصبح سالباً', en: 'Wool becomes negative' }, { ar: 'لا يحدث شيء', en: 'Nothing happens' }],
+                      correct: 0, answer: { ar: 'الإبونيت يكتسب إلكترونات من الصوف', en: 'Ebonite gains electrons from wool' } },
+                    { q: { ar: 'الشحن بالدلك يعتمد على:', en: 'Charging by friction depends on:' },
+                      options: [{ ar: 'اختلاف قابلية المواد للإلكترونات', en: 'Different electron affinity of materials' }, { ar: 'درجة الحرارة فقط', en: 'Temperature only' }, { ar: 'الضغط فقط', en: 'Pressure only' }, { ar: 'اللون', en: 'Color' }],
+                      correct: 0, answer: { ar: 'سلسلة الكهرباء الساكنة تحدد من يكتسب ومن يفقد', en: 'Triboelectric series determines who gains/loses' } },
+                    { q: { ar: 'مجموع شحنتي جسمين بعد الدلك:', en: 'Sum of charges of two objects after friction:' },
+                      options: [{ ar: 'يساوي صفراً (إذا كانا متعادلين)', en: 'Equals zero (if initially neutral)' }, { ar: 'موجب دائماً', en: 'Always positive' }, { ar: 'سالب دائماً', en: 'Always negative' }, { ar: 'يعتمد على المادة', en: 'Depends on material' }],
+                      correct: 0, answer: { ar: 'حفظ الشحنة: المجموع يبقى كما كان', en: 'Charge conservation: sum remains same' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 الشحن بالتوصيل', en: ' Charging by Conduction' },
+                questions: [
+                    { q: { ar: 'الشحن بالتوصيل يتطلب:', en: 'Charging by conduction requires:' },
+                      options: [{ ar: 'تلامس مباشر بين الجسمين', en: 'Direct contact between objects' }, { ar: 'قرب بدون تلامس', en: 'Proximity without contact' }, { ar: 'تأريض فقط', en: 'Grounding only' }, { ar: 'دلك', en: 'Friction' }],
+                      correct: 0, answer: { ar: 'التوصيل: تلامس مباشر', en: 'Conduction: direct contact' } },
+                    { q: { ar: 'كرة متعادلة تلامست كرة موجبة الشحنة. الكرة المتعادلة تصبح:', en: 'Neutral sphere touches positively charged sphere. Neutral sphere becomes:' },
+                      options: [{ ar: 'موجبة الشحنة', en: 'Positively charged' }, { ar: 'سالبة الشحنة', en: 'Negatively charged' }, { ar: 'متعادلة', en: 'Neutral' }, { ar: 'تعتمد على الحجم', en: 'Depends on size' }],
+                      correct: 0, answer: { ar: 'التوصيل يعطي نفس نوع الشحنة', en: 'Conduction gives same type of charge' } },
+                    { q: { ar: 'بعد فصل الجسمين المشحونين بالتوصيل:', en: 'After separating objects charged by conduction:' },
+                      options: [{ ar: 'كلاهما له نفس نوع الشحنة', en: 'Both have same type of charge' }, { ar: 'لهما شحنات متعاكسة', en: 'They have opposite charges' }, { ar: 'أحدهما متعادل', en: 'One is neutral' }, { ar: 'كلاهما متعادل', en: 'Both neutral' }],
+                      correct: 0, answer: { ar: 'التوصيل: نفس نوع الشحنة', en: 'Conduction: same type of charge' } },
+                    { q: { ar: 'الشحن بالتوصيل يحدث في:', en: 'Charging by conduction occurs in:' },
+                      options: [{ ar: 'الموصلات فقط', en: 'Conductors only' }, { ar: 'العوازل فقط', en: 'Insulators only' }, { ar: 'كلاهما', en: 'Both' }, { ar: 'الفراغ فقط', en: 'Vacuum only' }],
+                      correct: 0, answer: { ar: 'التوصيل يحتاج إلكترونات حرة (موصلات)', en: 'Conduction needs free electrons (conductors)' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 الشحن بالحث', en: '🔹 Charging by Induction' },
+                questions: [
+                    { q: { ar: 'الشحن بالحث يعطي:', en: 'Charging by induction produces:' },
+                      options: [{ ar: 'شحنة معاكسة لشحنة الجسم المشحون', en: 'Charge opposite to charged object' }, { ar: 'نفس شحنة الجسم المشحون', en: 'Same charge as charged object' }, { ar: 'شحنة متعادلة', en: 'Neutral charge' }, { ar: 'لا شحنة', en: 'No charge' }],
+                      correct: 0, answer: { ar: 'الحث: شحنة معاكسة', en: 'Induction: opposite charge' } },
+                    { q: { ar: 'خطوات الشحن بالحث بالترتيب:', en: 'Steps of charging by induction in order:' },
+                      options: [{ ar: 'تقريب، تأريض، فصل التأريض، إبعاد', en: 'Approach, ground, remove ground, remove rod' }, { ar: 'تلامس، تأريض، فصل', en: 'Contact, ground, separate' }, { ar: 'دلك، تأريض، فصل', en: 'Rub, ground, separate' }, { ar: 'تأريض، تقريب، فصل', en: 'Ground, approach, separate' }],
+                      correct: 0, answer: { ar: '1.تقريب القضيب 2.تأريض 3.فصل التأريض 4.إبعاد القضيب', en: '1.Approach rod 2.Ground 3.Remove ground 4.Remove rod' } },
+                    { q: { ar: 'قضيب سالب قُرّب من كرة متعادلة مؤرضة. بعد فتح المفتاح وإبعاد القضيب:', en: 'Negative rod near grounded neutral sphere. After opening switch and removing rod:' },
+                      options: [{ ar: 'الكرة موجبة الشحنة', en: 'Sphere positively charged' }, { ar: 'الكرة سالبة الشحنة', en: 'Sphere negatively charged' }, { ar: 'الكرة متعادلة', en: 'Sphere neutral' }, { ar: 'تعتمد على المادة', en: 'Depends on material' }],
+                      correct: 0, answer: { ar: 'القضيب السالب يدفع الإلكترونات للأرض → الكرة موجبة', en: 'Negative rod pushes electrons to ground → sphere positive' } },
+                    { q: { ar: 'في الشحن بالحث، الجسم المشحون:', en: 'In charging by induction, the charged object:' },
+                      options: [{ ar: 'لا يفقد شحنته', en: 'Does not lose its charge' }, { ar: 'يفقد كل شحنته', en: 'Loses all its charge' }, { ar: 'ينصف شحنته', en: 'Halves its charge' }, { ar: 'يعكس شحنته', en: 'Reverses its charge' }],
+                      correct: 0, answer: { ar: 'الحث: الجسم الأصلي يحتفظ بشحنته', en: 'Induction: original object keeps its charge' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 المكشاف الكهربائي', en: '🔹 Electroscope' },
+                questions: [
+                    { q: { ar: 'المكشاف الكهربائي يستخدم لـ:', en: 'Electroscope is used to:' },
+                      svg: svgGraphs.electroscope,
+                      options: [{ ar: 'كشف وجود الشحنة ونوعها', en: 'Detect presence and type of charge' }, { ar: 'قياس الجهد فقط', en: 'Measure voltage only' }, { ar: 'قياس التيار', en: 'Measure current' }, { ar: 'توليد الكهرباء', en: 'Generate electricity' }],
+                      correct: 0, answer: { ar: 'المكشاف: كشف الشحنات', en: 'Electroscope: detect charges' } },
+                    { q: { ar: 'تنفرج ورقتي الذهب في المكشاف يدل على:', en: 'Divergence of gold leaves indicates:' },
+                      options: [{ ar: 'وجود شحنة كهربائية', en: 'Presence of electric charge' }, { ar: 'عدم وجود شحنة', en: 'Absence of charge' }, { ar: 'وجود مجال مغناطيسي', en: 'Presence of magnetic field' }, { ar: 'ارتفاع الحرارة', en: 'Temperature increase' }],
+                      correct: 0, answer: { ar: 'التنفرج = وجود شحنة (تنافر)', en: 'Divergence = charge present (repulsion)' } },
+                    { q: { ar: 'عند تقريب جسم موجب من مكشاف مشحون موجب:', en: 'When positive object nears positively charged electroscope:' },
+                      options: [{ ar: 'يزداد تنفرج الأوراق', en: 'Leaf divergence increases' }, { ar: 'يقل التنفرج', en: 'Divergence decreases' }, { ar: 'لا يتغير', en: 'No change' }, { ar: 'تنغلق الأوراق', en: 'Leaves close' }],
+                      correct: 0, answer: { ar: 'نفس الشحنة → تنافر أكثر → تنفرج أكبر', en: 'Same charge → more repulsion → more divergence' } },
+                    { q: { ar: 'المكشاف المشحون سالباً، قُرّب جسم موجب:', en: 'Negatively charged electroscope, positive object approached:' },
+                      options: [{ ar: 'يقل تنفرج الأوراق', en: 'Leaf divergence decreases' }, { ar: 'يزداد التنفرج', en: 'Divergence increases' }, { ar: 'لا يتغير', en: 'No change' }, { ar: 'تنغلق فوراً', en: 'Leaves close immediately' }],
+                      correct: 0, answer: { ar: 'شحنة معاكسة → تجاذب → يقل التنفرج', en: 'Opposite charge → attraction → less divergence' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 التأريض', en: '🔹 Grounding' },
+                questions: [
+                    { q: { ar: 'التأريض يعني:', en: 'Grounding means:' },
+                      options: [{ ar: 'توصيل الجسم بالأرض لنقل الشحنات', en: 'Connecting object to earth to transfer charges' }, { ar: 'عزل الجسم', en: 'Insulating object' }, { ar: 'شحن الجسم', en: 'Charging object' }, { ar: 'تفريغ الجسم من الطاقة', en: 'Discharging energy' }],
+                      correct: 0, answer: { ar: 'التأريض: الأرض مخزن كبير للشحنات', en: 'Grounding: earth is large charge reservoir' } },
+                    { q: { ar: 'جسم موجب أُرضي:', en: 'Positive object grounded:' },
+                      options: [{ ar: 'يكتسب إلكترونات من الأرض', en: 'Gains electrons from earth' }, { ar: 'يفقد بروتونات', en: 'Loses protons' }, { ar: 'لا يتغير', en: 'No change' }, { ar: 'يصبح أكثر إيجابية', en: 'Becomes more positive' }],
+                      correct: 0, answer: { ar: 'الأرض تعطي إلكترونات لتعادل الشحنة الموجبة', en: 'Earth gives electrons to neutralize positive charge' } },
+                    { q: { ar: 'جسم سالب أُرضي:', en: 'Negative object grounded:' },
+                      options: [{ ar: 'تنتقل إلكترونات زائدة للأرض', en: 'Excess electrons transfer to earth' }, { ar: 'يكتسب بروتونات', en: 'Gains protons' }, { ar: 'يصبح أكثر سلبية', en: 'Becomes more negative' }, { ar: 'لا يتغير', en: 'No change' }],
+                      correct: 0, answer: { ar: 'الإلكترونات الزائدة تنتقل للأرض', en: 'Excess electrons transfer to earth' } },
+                    { q: { ar: 'التأريض مهم في:', en: 'Grounding is important in:' },
+                      options: [{ ar: 'حماية الأجهزة من الصعق', en: 'Protecting devices from shock' }, { ar: 'زيادة الشحنة', en: 'Increasing charge' }, { ar: 'توليد الكهرباء', en: 'Generating electricity' }, { ar: 'العزل الحراري', en: 'Thermal insulation' }],
+                      correct: 0, answer: { ar: 'التأريض: سلامة كهربائية', en: 'Grounding: electrical safety' } }
+                ]
+            }
+        ]
+    },
+
+    equilibrium: {
+        id: 'equilibrium',
+        title: { ar: '⚖️ الإتزان الكهروستاتيكي', en: '⚖️ Electrostatic Equilibrium' },
+        subtitle: { ar: 'نقطة الإتزان، المحصلة صفر', en: 'Equilibrium point, net force zero' },
+        description: { ar: 'إيجاد نقطة الإتزان حيث المحصلة الكهروستاتيكية صفر', en: 'Finding equilibrium point where net electrostatic force is zero' },
+        duration: 3600,
+        color: 'from-purple-500 to-violet-600',
+        icon: '⚖️',
+        formulae: [
+            { ar: '<strong>عند الإتزان: F₁ = F₂</strong>', en: '<strong>At equilibrium: F₁ = F₂</strong>' },
+            { ar: '<strong>k|q₁q|/r₁² = k|q₂q|/r₂²</strong>', en: '<strong>k|q₁q|/r₁² = k|q₂q|/r₂²</strong>' },
+            { ar: '<strong>q₁/r₁² = q₂/r₂²</strong>', en: '<strong>q₁/r₁² = q₂/r₂²</strong>' },
+            { ar: '<strong>r₁ + r₂ = d</strong> (المسافة الكلية)', en: '<strong>r₁ + r₂ = d</strong> (total distance)' }
+        ],
+        sections: [
+            {
+                title: { ar: ' مفهوم الإتزان', en: ' Equilibrium Concept' },
+                questions: [
+                    { q: { ar: 'نقطة الإتزان الكهروستاتيكي هي:', en: 'Electrostatic equilibrium point is:' },
+                      svg: svgGraphs.equilibrium,
+                      options: [{ ar: 'النقطة التي تكون فيها المحصلة صفراً', en: 'Point where net force is zero' }, { ar: 'نقطة منتصف المسافة دائماً', en: 'Always midpoint' }, { ar: 'نقطة عند الشحنة الأكبر', en: 'Point at larger charge' }, { ar: 'نقطة خارج الخط الواصل', en: 'Point outside connecting line' }],
+                      correct: 0, answer: { ar: 'الإتزان: المحصلة = صفر', en: 'Equilibrium: net force = zero' } },
+                    { q: { ar: 'شحنتان موجبتان q₁=4μC و q₂=1μC على بعد 3m. نقطة الإتزان:', en: 'Two positive charges q₁=4μC and q₂=1μC at 3m. Equilibrium point:' },
+                      options: [{ ar: 'أقرب إلى q₂ (الشحنة الأصغر)', en: 'Closer to q₂ (smaller charge)' }, { ar: 'أقرب إلى q₁', en: 'Closer to q₁' }, { ar: 'في المنتصف', en: 'At midpoint' }, { ar: 'خارج الخط', en: 'Outside the line' }],
+                      correct: 0, answer: { ar: 'نقطة الإتزان أقرب للشحنة الأصغر', en: 'Equilibrium point closer to smaller charge' } },
+                    { q: { ar: 'شحنتان مختلفتان في الإشارة. نقطة الإتزان:', en: 'Two charges with different signs. Equilibrium point:' },
+                      options: [{ ar: 'خارج الخط الواصل بينهما', en: 'Outside the line connecting them' }, { ar: 'بينهما دائماً', en: 'Always between them' }, { ar: 'عند الشحنة الأكبر', en: 'At larger charge' }, { ar: 'غير موجودة', en: 'Does not exist' }],
+                      correct: 0, answer: { ar: 'لشحنات مختلفة: نقطة الإتزان خارج الخط', en: 'For different signs: equilibrium outside the line' } },
+                    { q: { ar: 'عند نقطة الإتزان، القوة على شحنة اختبار:', en: 'At equilibrium point, force on test charge:' },
+                      options: [{ ar: 'صفر', en: 'Zero' }, { ar: 'أقصى قيمة', en: 'Maximum' }, { ar: 'تعتمد على الشحنة', en: 'Depends on charge' }, { ar: 'غير معرّفة', en: 'Undefined' }],
+                      correct: 0, answer: { ar: 'عند الإتزان: F = 0', en: 'At equilibrium: F = 0' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 حساب نقطة الإتزان', en: '🔹 Calculating Equilibrium Point' },
+                questions: [
+                    { q: { ar: 'q₁=4q₂ على بعد d. نقطة الإتزان من q₂:', en: 'q₁=4q₂ at distance d. Equilibrium point from q₂:' },
+                      options: [{ ar: 'd/3', en: 'd/3' }, { ar: 'd/2', en: 'd/2' }, { ar: '2d/3', en: '2d/3' }, { ar: 'd/4', en: 'd/4' }],
+                      correct: 0, answer: { ar: 'q₁/r₁² = q₂/r₂² → 4/(d-r)² = 1/r² → r = d/3', en: 'q₁/r₁² = q₂/r₂² → 4/(d-r)² = 1/r² → r = d/3' } },
+                    { q: { ar: 'شحنتان متساويتان على بعد 6m. نقطة الإتزان:', en: 'Two equal charges at 6m. Equilibrium point:' },
+                      options: [{ ar: '3m من كل شحنة (المنتصف)', en: '3m from each (midpoint)' }, { ar: '2m من الأولى', en: '2m from first' }, { ar: '4m من الأولى', en: '4m from first' }, { ar: '1m من الأولى', en: '1m from first' }],
+                      correct: 0, answer: { ar: 'لشحنات متساوية: المنتصف', en: 'For equal charges: midpoint' } },
+                    { q: { ar: 'q₁=9μC, q₂=1μC, d=4m. المسافة من q₂ لنقطة الإتزان:', en: 'q₁=9μC, q₂=1μC, d=4m. Distance from q₂ to equilibrium:' },
+                      options: [{ ar: '1 m', en: '1 m' }, { ar: '2 m', en: '2 m' }, { ar: '3 m', en: '3 m' }, { ar: '0.5 m', en: '0.5 m' }],
+                      correct: 0, answer: { ar: '9/(4-r)² = 1/r² → 3/(4-r) = 1/r → r = 1m', en: '9/(4-r)² = 1/r² → 3/(4-r) = 1/r → r = 1m' } },
+                    { q: { ar: 'q₁=16q₂. نسبة r₁ إلى r₂ عند الإتزان:', en: 'q₁=16q₂. Ratio r₁ to r₂ at equilibrium:' },
+                      options: [{ ar: '4:1', en: '4:1' }, { ar: '2:1', en: '2:1' }, { ar: '16:1', en: '16:1' }, { ar: '1:4', en: '1:4' }],
+                      correct: 0, answer: { ar: 'r₁/r₂ = √(q₁/q₂) = √16 = 4', en: 'r₁/r₂ = √(q₁/q₂) = √16 = 4' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 مسائل متقدمة', en: '🔹 Advanced Problems' },
+                questions: [
+                    { q: { ar: 'ثلاث شحنات على خط: q₁=+1μC, q₂=+4μC, q₃=+1μC. q₂ في المنتصف. المحصلة على q₂:', en: 'Three charges on line: q₁=+1μC, q₂=+4μC, q₃=+1μC. q₂ at midpoint. Net force on q₂:' },
+                      options: [{ ar: 'صفر (تناظر)', en: 'Zero (symmetry)' }, { ar: 'تجاه q₁', en: 'Toward q₁' }, { ar: 'تجاه q₃', en: 'Toward q₃' }, { ar: 'تعتمد على المسافة', en: 'Depends on distance' }],
+                      correct: 0, answer: { ar: 'تناظر: القوتان متساويتان ومتعاكستان', en: 'Symmetry: forces equal and opposite' } },
+                    { q: { ar: 'شحنتان q₁=+2μC و q₂=-8μC على بعد 3m. نقطة الإتزان:', en: 'Charges q₁=+2μC and q₂=-8μC at 3m. Equilibrium point:' },
+                      options: [{ ar: 'خارج الخط靠近 q₁', en: 'Outside line near q₁' }, { ar: 'بينهما', en: 'Between them' }, { ar: 'خارج الخط靠近 q₂', en: 'Outside line near q₂' }, { ar: 'عند q₁', en: 'At q₁' }],
+                      correct: 0, answer: { ar: 'شحنات مختلفة → خارج الخط靠近 الشحنة الأصغر', en: 'Different signs → outside near smaller charge' } },
+                    { q: { ar: 'q₁=+q, q₂=-4q على بعد d. نقطة الإتزان من q₁:', en: 'q₁=+q, q₂=-4q at distance d. Equilibrium from q₁:' },
+                      options: [{ ar: 'd', en: 'd' }, { ar: 'd/2', en: 'd/2' }, { ar: '2d', en: '2d' }, { ar: 'd/3', en: 'd/3' }],
+                      correct: 0, answer: { ar: 'q/r² = 4q/(r+d)² → r = d', en: 'q/r² = 4q/(r+d)² → r = d' } },
+                    { q: { ar: 'في الإتزان المستقر، إذا أزيحت الشحنة:', en: 'In stable equilibrium, if charge displaced:' },
+                      options: [{ ar: 'تعود لموضع الإتزان', en: 'Returns to equilibrium' }, { ar: 'تبتعد أكثر', en: 'Moves further away' }, { ar: 'تبقى في المكان الجديد', en: 'Stays at new position' }, { ar: 'تهتز للأبد', en: 'Oscillates forever' }],
+                      correct: 0, answer: { ar: 'الإتزان المستقر: تعود للموضع الأصلي', en: 'Stable equilibrium: returns to original' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 تطبيقات', en: ' Applications' },
+                questions: [
+                    { q: { ar: 'كرة معلقة بخيط، شُحنت. عند الإتزان:', en: 'Suspended charged sphere in equilibrium:' },
+                      options: [{ ar: 'محصلة القوى = صفر', en: 'Net force = zero' }, { ar: 'القوة الكهربائية فقط', en: 'Electric force only' }, { ar: 'الجاذبية فقط', en: 'Gravity only' }, { ar: 'القوى غير متزنة', en: 'Forces unbalanced' }],
+                      correct: 0, answer: { ar: 'الإتزان: T + mg + F_e = 0', en: 'Equilibrium: T + mg + F_e = 0' } },
+                    { q: { ar: 'كرتان متماثلتان معلقتان، شُحنتا بنفس الشحنة. الزاوية بين الخيطين:', en: 'Two identical suspended spheres, same charge. Angle between threads:' },
+                      options: [{ ar: 'تزداد بزيادة الشحنة', en: 'Increases with charge' }, { ar: 'تقل بزيادة الشحنة', en: 'Decreases with charge' }, { ar: 'لا تتغير', en: 'No change' }, { ar: 'تصبح 180°', en: 'Becomes 180°' }],
+                      correct: 0, answer: { ar: 'شحنة أكبر → تنافر أكبر → زاوية أكبر', en: 'More charge → more repulsion → larger angle' } },
+                    { q: { ar: 'الإتزان في بعدين يتطلب:', en: 'Equilibrium in 2D requires:' },
+                      options: [{ ar: 'محصلة القوى في x و y = صفر', en: 'Net force in x and y = zero' }, { ar: 'قوة واحدة فقط', en: 'Only one force' }, { ar: 'قوتين متساويتين', en: 'Two equal forces' }, { ar: 'ثلاث قوى على الأقل', en: 'At least three forces' }],
+                      correct: 0, answer: { ar: 'ΣFx = 0 و ΣFy = 0', en: 'ΣFx = 0 and ΣFy = 0' } },
+                    { q: { ar: 'بروتون في مجال كهربائي. عند الإتزان:', en: 'Proton in electric field. At equilibrium:' },
+                      options: [{ ar: 'القوة الكهربائية = قوة أخرى معاكسة', en: 'Electric force = another opposite force' }, { ar: 'لا قوى تؤثر', en: 'No forces act' }, { ar: 'القوة الكهربائية صفر', en: 'Electric force zero' }, { ar: 'البروتون ساكن دائماً', en: 'Proton always stationary' }],
+                      correct: 0, answer: { ar: 'الإتزان: قوى متزنة', en: 'Equilibrium: balanced forces' } }
+                ]
+            }
+        ]
+    },
+
+    superposition: {
+        id: 'superposition',
+        title: { ar: '📐 مبدأ التراكب', en: '📐 Superposition Principle' },
+        subtitle: { ar: 'المحصلة الكهروستاتيكية', en: 'Net electrostatic force' },
+        description: { ar: 'حساب المحصلة القوى على شحنة من عدة شحنات', en: 'Calculating net force on charge from multiple charges' },
+        duration: 3600,
+        color: 'from-emerald-500 to-teal-600',
+        icon: '📐',
+        formulae: [
+            { ar: '<strong>F_R = F₁ + F₂ + F₃ + ...</strong>', en: '<strong>F_R = F₁ + F₂ + F₃ + ...</strong>' },
+            { ar: '<strong>جمع متجهي</strong>', en: '<strong>Vector addition</strong>' },
+            { ar: '<strong>F = √(Fx² + Fy²)</strong>', en: '<strong>F = √(Fx² + Fy²)</strong>' },
+            { ar: '<strong>θ = tan⁻¹(Fy/Fx)</strong>', en: '<strong>θ = tan⁻¹(Fy/Fx)</strong>' }
+        ],
+        sections: [
+            {
+                title: { ar: ' مفهوم التراكب', en: ' Superposition Concept' },
+                questions: [
+                    { q: { ar: 'مبدأ التراكب يعني:', en: 'Superposition principle means:' },
+                      svg: svgGraphs.superposition,
+                      options: [{ ar: 'القوة المحصلة = مجموع القوى متجهياً', en: 'Net force = vector sum of forces' }, { ar: 'القوة الأكبر فقط تؤثر', en: 'Only largest force matters' }, { ar: 'القوى تلغي بعضها', en: 'Forces cancel each other' }, { ar: 'قوة واحدة فقط', en: 'Only one force' }],
+                      correct: 0, answer: { ar: 'التراكب: جمع متجهي للقوى', en: 'Superposition: vector sum of forces' } },
+                    { q: { ar: 'قوتان F₁=3N و F₂=4N متعامدتان. المحصلة:', en: 'Two forces F₁=3N and F₂=4N perpendicular. Net force:' },
+                      options: [{ ar: '5 N', en: '5 N' }, { ar: '7 N', en: '7 N' }, { ar: '1 N', en: '1 N' }, { ar: '12 N', en: '12 N' }],
+                      correct: 0, answer: { ar: 'F = √(3²+4²) = 5N', en: 'F = (3²+4²) = 5N' } },
+                    { q: { ar: 'قوتان متساويتان ومتعاكستان. المحصلة:', en: 'Two equal and opposite forces. Net force:' },
+                      options: [{ ar: 'صفر', en: 'Zero' }, { ar: 'ضعف القوة', en: 'Double the force' }, { ar: 'نصف القوة', en: 'Half the force' }, { ar: 'تعتمد على الزاوية', en: 'Depends on angle' }],
+                      correct: 0, answer: { ar: 'F - F = 0', en: 'F - F = 0' } },
+                    { q: { ar: 'ثلاث قوى متساوية الزوايا 120° بينها. المحصلة:', en: 'Three equal forces at 120° angles. Net force:' },
+                      options: [{ ar: 'صفر', en: 'Zero' }, { ar: 'F', en: 'F' }, { ar: '2F', en: '2F' }, { ar: '3F', en: '3F' }],
+                      correct: 0, answer: { ar: 'تناظر 120°: المحصلة = صفر', en: '120° symmetry: net = zero' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 حساب المحصلة', en: '🔹 Net Force Calculation' },
+                questions: [
+                    { q: { ar: 'q₁=+1μC عند x=0, q₂=+1μC عند x=2m. القوة على q₃=+1μC عند x=1m:', en: 'q₁=+1μC at x=0, q₂=+1μC at x=2m. Force on q₃=+1μC at x=1m:' },
+                      options: [{ ar: 'صفر (تناظر)', en: 'Zero (symmetry)' }, { ar: 'تجاه q₁', en: 'Toward q₁' }, { ar: 'تجاه q₂', en: 'Toward q₂' }, { ar: '4.5N', en: '4.5N' }],
+                      correct: 0, answer: { ar: 'تناظر: القوتان متساويتان ومتعاكستان', en: 'Symmetry: forces equal and opposite' } },
+                    { q: { ar: 'q₁=+2μC عند (0,0), q₂=+2μC عند (3,0). القوة على q₃=+1μC عند (1.5,0):', en: 'q₁=+2μC at (0,0), q₂=+2μC at (3,0). Force on q₃=+1μC at (1.5,0):' },
+                      options: [{ ar: 'صفر', en: 'Zero' }, { ar: 'تجاه +x', en: 'Toward +x' }, { ar: 'تجاه -x', en: 'Toward -x' }, { ar: '8N', en: '8N' }],
+                      correct: 0, answer: { ar: 'تناظر حول المنتصف: المحصلة = صفر', en: 'Symmetry about midpoint: net = zero' } },
+                    { q: { ar: 'q₁=+1μC عند (0,0), q₂=-1μC عند (2,0). القوة على q₃=+1μC عند (1,0):', en: 'q₁=+1μC at (0,0), q₂=-1μC at (2,0). Force on q=+1μC at (1,0):' },
+                      options: [{ ar: 'تجاه q₂ (قوة تجاذب)', en: 'Toward q₂ (attraction)' }, { ar: 'صفر', en: 'Zero' }, { ar: 'تجاه q₁', en: 'Toward q₁' }, { ar: 'عمودي على المحور', en: 'Perpendicular to axis' }],
+                      correct: 0, answer: { ar: 'q₁ تدفع q₃ لليمين، q₂ تجذب q₃ لليمين → المحصلة لليمين', en: 'q₁ pushes q₃ right, q₂ attracts q right → net right' } },
+                    { q: { ar: 'q₁=+3μC عند (0,0), q₂=+3μC عند (0,4). القوة على q₃=+1μC عند (3,0):', en: 'q₁=+3μC at (0,0), q₂=+3μC at (0,4). Force on q₃=+1μC at (3,0):' },
+                      options: [{ ar: 'لها مركبتان x و y', en: 'Has x and y components' }, { ar: 'في اتجاه x فقط', en: 'In x direction only' }, { ar: 'في اتجاه y فقط', en: 'In y direction only' }, { ar: 'صفر', en: 'Zero' }],
+                      correct: 0, answer: { ar: 'q₁ تدفع في +x، q₂ تدفع في اتجاه مائل', en: 'q₁ pushes in +x, q₂ pushes at angle' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 مسائل ثنائية الأبعاد', en: '🔹 2D Problems' },
+                questions: [
+                    { q: { ar: 'q₁=+1μC عند (0,0), q₂=+1μC عند (3,0), q₃=+1μC عند (0,4). المحصلة على q₁:', en: 'q₁=+1μC at (0,0), q₂=+1μC at (3,0), q₃=+1μC at (0,4). Net on q₁:' },
+                      options: [{ ar: 'في الربع الثالث', en: 'In third quadrant' }, { ar: 'في الربع الأول', en: 'In first quadrant' }, { ar: 'في اتجاه +x', en: 'In +x direction' }, { ar: 'صفر', en: 'Zero' }],
+                      correct: 0, answer: { ar: 'q₂ تدفع لليسار (-x)، q₃ تدفع للأسفل (-y)', en: 'q₂ pushes left (-x), q₃ pushes down (-y)' } },
+                    { q: { ar: 'q₁ عند (0,0), q₂ عند (a,0), q₃ عند (0,a). جميعها +q. المحصلة على q₁:', en: 'q₁ at (0,0), q₂ at (a,0), q₃ at (0,a). All +q. Net on q₁:' },
+                      options: [{ ar: 'بزاوية 225° من +x', en: 'At 225° from +x' }, { ar: 'بزاوية 45°', en: 'At 45°' }, { ar: 'في اتجاه +x', en: 'In +x' }, { ar: 'صفر', en: 'Zero' }],
+                      correct: 0, answer: { ar: 'القوتان في -x و -y → المحصلة في الربع الثالث (225°)', en: 'Forces in -x and -y → net in third quadrant (225°)' } },
+                    { q: { ar: 'مربع أضلاعه a، شحنات +q عند الرؤوس. المحصلة على شحنة عند مركز المربع:', en: 'Square side a, charges +q at vertices. Net on charge at center:' },
+                      options: [{ ar: 'صفر (تناظر)', en: 'Zero (symmetry)' }, { ar: 'تجاه رأس', en: 'Toward vertex' }, { ar: 'على طول الضلع', en: 'Along side' }, { ar: '4F', en: '4F' }],
+                      correct: 0, answer: { ar: 'تناظر كامل: المحصلة = صفر', en: 'Full symmetry: net = zero' } },
+                    { q: { ar: 'مثلث متساوي الأضلاع، شحنات +q عند الرؤوس. المحصلة على شحنة عند المركز:', en: 'Equilateral triangle, charges +q at vertices. Net on charge at center:' },
+                      options: [{ ar: 'صفر', en: 'Zero' }, { ar: 'تجاه رأس', en: 'Toward vertex' }, { ar: 'على طول ضلع', en: 'Along side' }, { ar: '3F', en: '3F' }],
+                      correct: 0, answer: { ar: 'تناظر 120°: المحصلة = صفر', en: '120° symmetry: net = zero' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 تطبيقات', en: '🔹 Applications' },
+                questions: [
+                    { q: { ar: 'لحساب المحصلة، نستخدم:', en: 'To calculate net force, we use:' },
+                      options: [{ ar: 'تحليل المركبات x و y', en: 'Component analysis in x and y' }, { ar: 'جمع الجبري فقط', en: 'Algebraic sum only' }, { ar: 'أكبر قوة فقط', en: 'Largest force only' }, { ar: 'متوسط القوى', en: 'Average of forces' }],
+                      correct: 0, answer: { ar: 'تحليل متجهي: Fx و Fy', en: 'Vector analysis: Fx and Fy' } },
+                    { q: { ar: 'إذا كانت Fx=3N و Fy=4N، فالمحصلة:', en: 'If Fx=3N and Fy=4N, net force:' },
+                      options: [{ ar: '5 N', en: '5 N' }, { ar: '7 N', en: '7 N' }, { ar: '1 N', en: '1 N' }, { ar: '12 N', en: '12 N' }],
+                      correct: 0, answer: { ar: 'F = √(9+16) = 5N', en: 'F = √(9+16) = 5N' } },
+                    { q: { ar: 'زاوية المحصلة مع المحور x إذا Fx=3, Fy=3:', en: 'Angle of net force with x-axis if Fx=3, Fy=3:' },
+                      options: [{ ar: '45°', en: '45°' }, { ar: '30°', en: '30°' }, { ar: '60°', en: '60°' }, { ar: '90°', en: '90°' }],
+                      correct: 0, answer: { ar: 'θ = tan⁻¹(3/3) = 45°', en: 'θ = tan⁻¹(3/3) = 45°' } },
+                    { q: { ar: 'مبدأ التراكب ينطبق على:', en: 'Superposition principle applies to:' },
+                      options: [{ ar: 'القوى الكهربائية فقط', en: 'Electric forces only' }, { ar: 'جميع القوى', en: 'All forces' }, { ar: 'القوى النووية فقط', en: 'Nuclear forces only' }, { ar: 'الجاذبية فقط', en: 'Gravity only' }],
+                      correct: 1, answer: { ar: 'التراكب: مبدأ عام في الفيزياء', en: 'Superposition: general principle in physics' } }
+                ]
+            }
+        ]
+    },
+
+    electroscope_advanced: {
+        id: 'electroscope_advanced',
+        title: { ar: ' المكشاف الكهربائي المتقدم', en: ' Advanced Electroscope' },
+        subtitle: { ar: 'التطبيقات العملية والتحليل', en: 'Practical applications and analysis' },
+        description: { ar: 'تحليل سلوك المكشاف في حالات مختلفة', en: 'Analyzing electroscope behavior in different situations' },
+        duration: 3600,
+        color: 'from-indigo-500 to-purple-600',
+        icon: '',
+        formulae: [
+            { ar: '<strong>التنفرج ∝ الشحنة</strong>', en: '<strong>Divergence ∝ charge</strong>' },
+            { ar: '<strong>نفس الشحنة → تنافر</strong>', en: '<strong>Same charge → repulsion</strong>' },
+            { ar: '<strong>معاكس → تجاذب</strong>', en: '<strong>Opposite → attraction</strong>' },
+            { ar: '<strong>الحث: توزيع الشحنات</strong>', en: '<strong>Induction: charge distribution</strong>' }
+        ],
+        sections: [
+            {
+                title: { ar: '🔹 سلوك المكشاف', en: '🔹 Electroscope Behavior' },
+                questions: [
+                    { q: { ar: 'مكشاف موجب الشحنة، قُرّب جسم موجب:', en: 'Positively charged electroscope, positive object approached:' },
+                      svg: svgGraphs.electroscope,
+                      options: [{ ar: 'يزداد التنفرج', en: 'Divergence increases' }, { ar: 'يقل التنفرج', en: 'Divergence decreases' }, { ar: 'لا يتغير', en: 'No change' }, { ar: 'تنغلق الأوراق', en: 'Leaves close' }],
+                      correct: 0, answer: { ar: 'نفس الشحنة → تنافر إضافي', en: 'Same charge → additional repulsion' } },
+                    { q: { ar: 'مكشاف سالب الشحنة، قُرّب جسم موجب:', en: 'Negatively charged electroscope, positive object approached:' },
+                      options: [{ ar: 'يقل التنفرج', en: 'Divergence decreases' }, { ar: 'يزداد التنفرج', en: 'Divergence increases' }, { ar: 'لا يتغير', en: 'No change' }, { ar: 'تنغلق فوراً', en: 'Leaves close immediately' }],
+                      correct: 0, answer: { ar: 'شحنة معاكسة → تجاذب → يقل التنفرج', en: 'Opposite charge → attraction → less divergence' } },
+                    { q: { ar: 'مكشاف متعادل، قُرّب جسم مشحون (بدون تلامس):', en: 'Neutral electroscope, charged object approached (no contact):' },
+                      options: [{ ar: 'تنفرج مؤقت للأوراق', en: 'Temporary leaf divergence' }, { ar: 'لا يحدث شيء', en: 'Nothing happens' }, { ar: 'تنفرج دائم', en: 'Permanent divergence' }, { ar: 'تنغلق الأوراق', en: 'Leaves close' }],
+                      correct: 0, answer: { ar: 'حث: تنفرج مؤقت يزول بإبعاد الجسم', en: 'Induction: temporary divergence' } },
+                    { q: { ar: 'مكشاف مشحون، لُمس بجسم متعادل:', en: 'Charged electroscope, touched by neutral object:' },
+                      options: [{ ar: 'يقل التنفرج (توزيع الشحنة)', en: 'Divergence decreases (charge distribution)' }, { ar: 'يزداد التنفرج', en: 'Divergence increases' }, { ar: 'لا يتغير', en: 'No change' }, { ar: 'ينغلق فوراً', en: 'Closes immediately' }],
+                      correct: 0, answer: { ar: 'الشحنة تتوزع → يقل التنفرج', en: 'Charge distributes → less divergence' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 تحديد نوع الشحنة', en: '🔹 Determining Charge Type' },
+                questions: [
+                    { q: { ar: 'مكشاف موجب، قُرّب جسم فزاد التنفرج. الجسم:', en: 'Positive electroscope, object approached and divergence increased. Object:' },
+                      options: [{ ar: 'موجب الشحنة', en: 'Positively charged' }, { ar: 'سالب الشحنة', en: 'Negatively charged' }, { ar: 'متعادل', en: 'Neutral' }, { ar: 'لا يمكن التحديد', en: 'Cannot determine' }],
+                      correct: 0, answer: { ar: 'زيادة التنفرج = نفس الشحنة', en: 'Increased divergence = same charge' } },
+                    { q: { ar: 'مكشاف سالب، قُرّب جسم فقل التنفرج. الجسم:', en: 'Negative electroscope, object approached and divergence decreased. Object:' },
+                      options: [{ ar: 'موجب الشحنة', en: 'Positively charged' }, { ar: 'سالب الشحنة', en: 'Negatively charged' }, { ar: 'متعادل', en: 'Neutral' }, { ar: 'لا يمكن التحديد', en: 'Cannot determine' }],
+                      correct: 0, answer: { ar: 'نقصان التنفرج = شحنة معاكسة', en: 'Decreased divergence = opposite charge' } },
+                    { q: { ar: 'مكشاف متعادل، قُرّب جسم فتنفرجت الأوراق. الجسم:', en: 'Neutral electroscope, object approached and leaves diverged. Object:' },
+                      options: [{ ar: 'مشحون (موجب أو سالب)', en: 'Charged (positive or negative)' }, { ar: 'متعادل', en: 'Neutral' }, { ar: 'موجب فقط', en: 'Positive only' }, { ar: 'سالب فقط', en: 'Negative only' }],
+                      correct: 0, answer: { ar: 'أي شحنة تسبب حث وتنفرج', en: 'Any charge causes induction and divergence' } },
+                    { q: { ar: 'لتحديد نوع شحنة جسم مجهول:', en: 'To determine unknown charge type:' },
+                      options: [{ ar: 'نستخدم مكشاف مشحون بشحنة معروفة', en: 'Use electroscope with known charge' }, { ar: 'نستخدم مكشاف متعادل', en: 'Use neutral electroscope' }, { ar: 'نلمس الجسم بالمكشاف', en: 'Touch object to electroscope' }, { ar: 'لا يمكن التحديد', en: 'Cannot determine' }],
+                      correct: 0, answer: { ar: 'مكشاف مشحون بشحنة معروفة يكشف النوع', en: 'Charged electroscope with known charge reveals type' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 الشحن بالحث والمكشاف', en: '🔹 Induction & Electroscope' },
+                questions: [
+                    { q: { ar: 'مكشاف متعادل، قُرّب قضيب سالب ثم أُرضي:', en: 'Neutral electroscope, negative rod approached then grounded:' },
+                      options: [{ ar: 'يصبح موجب الشحنة', en: 'Becomes positively charged' }, { ar: 'يصبح سالب الشحنة', en: 'Becomes negatively charged' }, { ar: 'يبقى متعادلاً', en: 'Remains neutral' }, { ar: 'يصبح مشحوناً بشحنة مجهولة', en: 'Becomes charged with unknown' }],
+                      correct: 0, answer: { ar: 'الحث: شحنة معاكسة للقضيب', en: 'Induction: opposite charge to rod' } },
+                    { q: { ar: 'ترتيب شحن المكشاف بالحث:', en: 'Order of charging electroscope by induction:' },
+                      options: [{ ar: 'تقريب، تأريض، فصل التأريض، إبعاد', en: 'Approach, ground, remove ground, remove rod' }, { ar: 'تلامس، تأريض، فصل', en: 'Contact, ground, separate' }, { ar: 'تأريض، تقريب، فصل', en: 'Ground, approach, separate' }, { ar: 'دلك، تأريض', en: 'Rub, ground' }],
+                      correct: 0, answer: { ar: '1.تقريب 2.تأريض 3.فصل التأريض 4.إبعاد', en: '1.Approach 2.Ground 3.Remove ground 4.Remove rod' } },
+                    { q: { ar: 'بعد شحن المكشاف بالحث بنجاح:', en: 'After successfully charging electroscope by induction:' },
+                      options: [{ ar: 'الأوراق متنفرجة بشحنة معاكسة', en: 'Leaves diverged with opposite charge' }, { ar: 'الأوراق منغلقة', en: 'Leaves closed' }, { ar: 'الأوراق متنفرجة بنفس شحنة القضيب', en: 'Leaves diverged with same charge as rod' }, { ar: 'المكشاف متعادل', en: 'Electroscope neutral' }],
+                      correct: 0, answer: { ar: 'الحث: شحنة معاكسة', en: 'Induction: opposite charge' } },
+                    { q: { ar: 'إذا لُمس المكشاف المشحون بالحث بقضيب بنفس شحنته:', en: 'If electroscope charged by induction touched by rod with same charge:' },
+                      options: [{ ar: 'يزداد التنفرج', en: 'Divergence increases' }, { ar: 'يقل التنفرج', en: 'Divergence decreases' }, { ar: 'لا يتغير', en: 'No change' }, { ar: 'ينغلق', en: 'Closes' }],
+                      correct: 0, answer: { ar: 'نفس الشحنة → تنافر إضافي', en: 'Same charge → additional repulsion' } }
+                ]
+            },
+            {
+                title: { ar: '🔹 تطبيقات عملية', en: '🔹 Practical Applications' },
+                questions: [
+                    { q: { ar: 'المكشاف الكهربائي لا يمكن شحنه بـ:', en: 'Electroscope cannot be charged by:' },
+                      options: [{ ar: 'الدلك (لأنه يحتاج جسمين)', en: 'Friction (needs two objects)' }, { ar: 'التوصيل', en: 'Conduction' }, { ar: 'الحث', en: 'Induction' }, { ar: 'التأريض', en: 'Grounding' }],
+                      correct: 0, answer: { ar: 'الدلك يحتاج جسمين مختلفين', en: 'Friction needs two different objects' } },
+                    { q: { ar: 'ورقتا المكشاف مصنوعتان من:', en: 'Electroscope leaves made of:' },
+                      options: [{ ar: 'ذهب أو ألمنيوم رقيق', en: 'Gold or thin aluminum' }, { ar: 'حديد سميك', en: 'Thick iron' }, { ar: 'نحاس', en: 'Copper' }, { ar: 'خشب', en: 'Wood' }],
+                      correct: 0, answer: { ar: 'معادن خفيفة ورقيقة', en: 'Light thin metals' } },
+                    { q: { ar: 'المكشاف داخل قفص فاراداي:', en: 'Electroscope inside Faraday cage:' },
+                      options: [{ ar: 'لا يتأثر بالمجالات الخارجية', en: 'Not affected by external fields' }, { ar: 'يزداد حساسية', en: 'More sensitive' }, { ar: 'يفقد شحنته', en: 'Loses charge' }, { ar: 'ينفجر', en: 'Explodes' }],
+                      correct: 0, answer: { ar: 'قفص فاراداي يحمي من المجالات', en: 'Faraday cage protects from fields' } },
+                    { q: { ar: 'عند تفريغ المكشاف:', en: 'When discharging electroscope:' },
+                      options: [{ ar: 'الأوراق تنغلق تدريجياً', en: 'Leaves close gradually' }, { ar: 'الأوراق تنفرج أكثر', en: 'Leaves diverge more' }, { ar: 'لا يتغير', en: 'No change' }, { ar: 'ينكسر', en: 'Breaks' }],
+                      correct: 0, answer: { ar: 'فقدان الشحنة → انغلاق الأوراق', en: 'Loss of charge → leaves close' } }
+                ]
+            }
+        ]
+    }
+};
+
+// ==================== Utility Functions ====================
+function shuffleArray(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+function showSaveIndicator() {
+    const indicator = document.getElementById('saveIndicator');
+    indicator.style.opacity = '1';
+    if (saveIndicatorTimeout) clearTimeout(saveIndicatorTimeout);
+    saveIndicatorTimeout = setTimeout(() => { indicator.style.opacity = '0'; }, 1500);
+}
+
+function saveState() {
+    try {
+        const state = {
+            currentExam: currentExam,
+            seed: currentSeed,
+            lang: currentLang,
+            studentName: document.getElementById('studentName').value,
+            studentClass: document.getElementById('studentClass').value,
+            examDate: document.getElementById('examDate').value,
+            answers: getSelectedAnswers(),
+            timeRemaining: timeRemaining,
+            answersVisible: answersVisible
+        };
+        localStorage.setItem('physics_review_hub', JSON.stringify(state));
+        showSaveIndicator();
+    } catch (e) { console.error('Save error:', e); }
+}
+
+function loadState() {
+    try {
+        const saved = localStorage.getItem('physics_review_hub');
+        return saved ? JSON.parse(saved) : null;
+    } catch (e) { return null; }
+}
+
+function getSelectedAnswers() {
+    const answers = {};
+    const inputs = document.querySelectorAll('#exam-content input[type="radio"]:checked');
+    inputs.forEach(input => {
+        const match = input.name.match(/q(\d+)/);
+        if (match) answers[match[1]] = input.value;
+    });
+    return answers;
+}
+
+function restoreAnswers(answers) {
+    if (!answers) return;
+    for (const [idx, val] of Object.entries(answers)) {
+        const radio = document.querySelector(`input[name="q${idx}"][value="${val}"]`);
+        if (radio) radio.checked = true;
+    }
+}
+
+function clearProgress() {
+    const msg = currentLang === 'ar' ? '⚠️ هل أنت متأكد من مسح كل التقدم؟' : '⚠️ Clear all progress?';
+    if (confirm(msg)) {
+        localStorage.removeItem('physics_review_hub');
+        localStorage.removeItem('review_stats');
+        location.reload();
+    }
+}
+
+// ==================== Dashboard Functions ====================
+function renderDashboard() {
+    const grid = document.getElementById('topics-grid');
+    grid.innerHTML = '';
+    
+    Object.values(EXAMS_DB).forEach(exam => {
+        const card = document.createElement('div');
+        card.className = `topic-card bg-gradient-to-br ${exam.color} text-white p-6 rounded-2xl shadow-lg`;
+        card.onclick = () => loadExam(exam.id);
+        card.innerHTML = `
+            <div class="text-5xl mb-3">${exam.icon}</div>
+            <h3 class="text-xl font-bold mb-2">${exam.title[currentLang]}</h3>
+            <p class="text-sm opacity-90 mb-1">${exam.subtitle[currentLang]}</p>
+            <p class="text-xs opacity-75 mb-3">${exam.description[currentLang]}</p>
+            <div class="flex justify-between items-center text-xs">
+                <span>⏱️ ${Math.floor(exam.duration/60)} ${currentLang === 'ar' ? 'دقيقة' : 'min'}</span>
+                <span>📝 ${exam.sections.reduce((sum, s) => sum + s.questions.length, 0)} ${currentLang === 'ar' ? 'سؤال' : 'questions'}</span>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+    
+    updateStats();
+}
+
+function updateStats() {
+    try {
+        const stats = JSON.parse(localStorage.getItem('review_stats') || '{"completed":0,"totalScore":0,"count":0}');
+        document.getElementById('stat-completed').textContent = stats.completed || 0;
+        document.getElementById('stat-avg').textContent = stats.count > 0 ? Math.round(stats.totalScore/stats.count) + '%' : '0%';
+    } catch (e) {}
+}
+
+function saveStats(score) {
+    try {
+        const stats = JSON.parse(localStorage.getItem('review_stats') || '{"completed":0,"totalScore":0,"count":0}');
+        stats.completed++;
+        stats.totalScore += score;
+        stats.count++;
+        localStorage.setItem('review_stats', JSON.stringify(stats));
+    } catch (e) {}
+}
+
+// ==================== Exam Functions ====================
+function loadExam(examId) {
+    currentExam = EXAMS_DB[examId];
+    if (!currentExam) return;
+    
+    currentSeed = Date.now();
+    answersVisible = false;
+    timeRemaining = currentExam.duration;
+    
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('exam-container').style.display = 'block';
+    document.getElementById('exam-container').classList.add('fade-in');
+    
+    document.getElementById('exam-title').textContent = currentExam.title[currentLang];
+    document.getElementById('exam-subtitle').textContent = currentExam.subtitle[currentLang];
+    document.getElementById('exam-description').textContent = currentExam.description[currentLang];
+    document.getElementById('exam-info').textContent = currentLang === 'ar' 
+        ? `💾 يتم حفظ تقدمك تلقائياً - ${currentExam.sections.reduce((s,sec)=>s+sec.questions.length,0)} سؤالاً في ${currentExam.sections.length} أقسام`
+        : `💾 Auto-saved - ${currentExam.sections.reduce((s,sec)=>s+sec.questions.length,0)} questions in ${currentExam.sections.length} sections`;
+    document.getElementById('exam-badge').textContent = currentExam.icon;
+    
+    const formulaBox = document.getElementById('formula-boxes');
+    formulaBox.innerHTML = currentExam.formulae.map(f => 
+        `<div class="formula-box" style="color: #991b1b;">${f[currentLang]}</div>`
+    ).join('');
+    
+    prepareShuffledExam();
+    renderExam();
+    startTimer();
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prepareShuffledExam() {
+    rng = mulberry32(currentSeed);
+    examData = JSON.parse(JSON.stringify(currentExam.sections));
+    correctAnswersMap = {};
+    let globalIdx = 0;
+    
+    examData.forEach((section) => {
+        section.questions = shuffleArray(section.questions);
+        section.questions.forEach((q) => {
+            const optionsWithCorrect = q.options.map((opt, idx) => ({ option: opt, isCorrect: idx === q.correct }));
+            const shuffledOptions = shuffleArray(optionsWithCorrect);
+            q.options = shuffledOptions.map(o => o.option);
+            q.correct = shuffledOptions.findIndex(o => o.isCorrect);
+            correctAnswersMap[globalIdx] = String.fromCharCode(97 + q.correct);
+            globalIdx++;
+        });
+    });
+}
+
+function renderExam() {
+    const container = document.getElementById('exam-content');
+    const labels = { ar: { option: ['أ', 'ب', 'ج', 'د'], answer: '✅ الإجابة:' }, en: { option: ['A', 'B', 'C', 'D'], answer: '✅ Answer:' } };
+    const lbl = labels[currentLang];
+    const isRTL = currentLang === 'ar';
+    
+    let html = '';
+    let globalIdx = 0;
+    
+    examData.forEach((section, secIdx) => {
+        html += `<section class="bg-white p-6 rounded-2xl shadow-lg border-2 border-red-100 fade-in">
+            <h2 class="text-xl font-bold mb-4 text-red-700">${section.title[currentLang]}</h2>
+            <ol class="space-y-4 text-sm">`;
+        
+        section.questions.forEach((q) => {
+            const bs = isRTL ? 'border-r-4 pr-4' : 'border-l-4 pl-4';
+            html += `<li class="${bs} border-red-400 py-2" id="q-${globalIdx}">
+                <strong>${globalIdx + 1}.</strong> ${q.q[currentLang]}<br>`;
+            
+            if (q.svg) html += `<div class="graph-container">${q.svg}</div>`;
+            
+            q.options.forEach((opt, oIdx) => {
+                const rs = isRTL ? 'mr-4 ml-2' : 'ml-4 mr-2';
+                html += `<label class="cursor-pointer block mt-1 ${isRTL ? 'mr-4' : 'ml-4'} hover:bg-red-50 rounded-lg p-1 transition">
+                    <input type="radio" name="q${globalIdx}" value="${String.fromCharCode(97 + oIdx)}" class="${rs}">
+                    ${lbl.option[oIdx]}) ${opt[currentLang]}</label>`;
+            });
+            
+            html += `<div class="answer-box text-green-700 mt-2 font-medium ${answersVisible ? '' : 'hidden'} bg-green-50 rounded-lg p-2">
+                ${lbl.answer} ${lbl.option[q.correct]}) ${q.options[q.correct][currentLang]} — ${q.answer[currentLang]}</div></li>`;
+            globalIdx++;
+        });
+        
+        html += `</ol></section>`;
+    });
+    
+    container.innerHTML = html;
+}
+
+function goToDashboard() {
+    if (timerInterval) clearInterval(timerInterval);
+    document.getElementById('exam-container').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    currentExam = null;
+    updateStats();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function reshuffleExam() {
+    if (!currentExam) return;
+    const msg = currentLang === 'ar' ? '🔄 أسئلة جديدة ومسح الإجابات. متأكد؟' : '🔄 New questions and clear answers. Sure?';
+    if (confirm(msg)) {
+        currentSeed = Date.now();
+        timeRemaining = currentExam.duration;
+        answersVisible = false;
+        prepareShuffledExam();
+        renderExam();
+        saveState();
+        alert(currentLang === 'ar' ? '🎲 تم تغيير الأسئلة! حظاً موفقاً! 🍀' : '🎲 Questions changed! Good luck! 🍀');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+function setLanguage(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.getElementById('btn-ar').classList.toggle('active', lang === 'ar');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    document.body.classList.toggle('en-mode', lang === 'en');
+    
+    document.querySelectorAll('[data-ar][data-en]').forEach(el => {
+        el.textContent = lang === 'ar' ? el.getAttribute('data-ar') : el.getAttribute('data-en');
+    });
+    
+    if (currentExam) {
+        document.getElementById('exam-title').textContent = currentExam.title[currentLang];
+        document.getElementById('exam-subtitle').textContent = currentExam.subtitle[currentLang];
+        document.getElementById('exam-description').textContent = currentExam.description[currentLang];
+        document.getElementById('exam-info').textContent = currentLang === 'ar' 
+            ? `💾 يتم حفظ تقدمك تلقائياً - ${currentExam.sections.reduce((s,sec)=>s+sec.questions.length,0)} سؤالاً في ${currentExam.sections.length} أقسام`
+            : ` Auto-saved - ${currentExam.sections.reduce((s,sec)=>s+sec.questions.length,0)} questions in ${currentExam.sections.length} sections`;
+        
+        const formulaBox = document.getElementById('formula-boxes');
+        formulaBox.innerHTML = currentExam.formulae.map(f => 
+            `<div class="formula-box" style="color: #991b1b;">${f[currentLang]}</div>`
+        ).join('');
+        
+        renderExam();
+    } else {
+        renderDashboard();
+    }
+    saveState();
+}
+
+function startTimer() {
+    updateTimerDisplay();
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        if (timeRemaining % 60 === 0) saveState();
+        if (timeRemaining <= 300) document.getElementById('timer').classList.add('timer-warning');
+        if (timeRemaining <= 0) {
+            clearInterval(timerInterval);
+            alert(currentLang === 'ar' ? "⏰ انتهى الوقت!" : "⏰ Time's up!");
+            gradeExam();
+        }
+    }, 1000);
+}
+
+function updateTimerDisplay() {
+    const m = Math.floor(timeRemaining / 60);
+    const s = timeRemaining % 60;
+    document.getElementById('timer').textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+}
+
+function toggleAnswers() {
+    answersVisible = !answersVisible;
+    document.querySelectorAll('.answer-box').forEach(el => el.classList.toggle('hidden', !answersVisible));
+    saveState();
+}
+
+function gradeExam() {
+    let correctCount = 0;
+    const totalQuestions = currentExam.sections.reduce((s, sec) => s + sec.questions.length, 0);
+    const sectionScores = new Array(currentExam.sections.length).fill(0);
+    
+    let globalIdx = 0;
+    currentExam.sections.forEach((section, secIdx) => {
+        section.questions.forEach(() => {
+            const sel = document.querySelector(`input[name="q${globalIdx}"]:checked`);
+            const li = document.getElementById(`q-${globalIdx}`);
+            if (li) {
+                if (sel && sel.value === correctAnswersMap[globalIdx]) {
+                    correctCount++;
+                    li.classList.add('correct');
+                    li.classList.remove('incorrect');
+                    sectionScores[secIdx]++;
+                } else {
+                    li.classList.add('incorrect');
+                    li.classList.remove('correct');
+                }
+            }
+            globalIdx++;
+        });
+    });
+    
+    const score = Math.round((correctCount / totalQuestions) * 100);
+    document.getElementById('res-total').textContent = `${score} / 100`;
+    document.getElementById('res-name').textContent = document.getElementById('studentName').value || (currentLang === 'ar' ? 'بطل' : 'Champion');
+    document.getElementById('res-date').textContent = new Date().toLocaleDateString(currentLang === 'ar' ? 'ar-AE' : 'en-US');
+    
+    const pc = document.getElementById('sections-performance');
+    pc.innerHTML = '';
+    currentExam.sections.forEach((s, idx) => {
+        pc.innerHTML += `<div class="flex justify-between items-center"><span class="text-gray-700">${s.title[currentLang]}</span><span class="font-bold text-red-700">${sectionScores[idx]}/${s.questions.length}</span></div>`;
+    });
+    
+    const badge = document.getElementById('success-badge');
+    document.getElementById('success-percent').textContent = `${score}%`;
+    
+    if (currentLang === 'ar') {
+        if (score >= 90) { badge.textContent = ' ممتاز جداً!'; badge.className = 'success-badge grade-excellent'; }
+        else if (score >= 75) { badge.textContent = '👏 ممتاز!'; badge.className = 'success-badge grade-good'; }
+        else if (score >= 50) { badge.textContent = '👍 جيد'; badge.className = 'success-badge grade-pass'; }
+        else { badge.textContent = '💪 حاول مرة أخرى'; badge.className = 'success-badge grade-fail'; }
+    } else {
+        if (score >= 90) { badge.textContent = '🌟 Outstanding!'; badge.className = 'success-badge grade-excellent'; }
+        else if (score >= 75) { badge.textContent = '👏 Excellent!'; badge.className = 'success-badge grade-good'; }
+        else if (score >= 50) { badge.textContent = ' Good'; badge.className = 'success-badge grade-pass'; }
+        else { badge.textContent = '💪 Try Again'; badge.className = 'success-badge grade-fail'; }
+    }
+    
+    document.getElementById('results-panel').classList.remove('hidden');
+    document.getElementById('results-panel').scrollIntoView({ behavior: 'smooth' });
+    if (timerInterval) clearInterval(timerInterval);
+    
+    saveStats(score);
+}
+
+function sendResultsToEmail() {
+    const btn = document.getElementById('sendEmailBtn');
+    const status = document.getElementById('emailStatus');
+    btn.disabled = true;
+    btn.textContent = currentLang === 'ar' ? ' جاري الإرسال...' : '⏳ Sending...';
+    
+    const name = document.getElementById('studentName').value || 'N/A';
+    const studentClass = document.getElementById('studentClass').value || 'N/A';
+    const date = document.getElementById('examDate').value || new Date().toLocaleDateString();
+    const score = document.getElementById('res-total').textContent;
+    const badge = document.getElementById('success-badge').textContent;
+    
+    let questionsHTML = '';
+    let globalIdx = 0;
+    currentExam.sections.forEach((section) => {
+        section.questions.forEach((q) => {
+            const sel = document.querySelector(`input[name="q${globalIdx}"]:checked`);
+            const sv = sel ? sel.value : null;
+            const cv = correctAnswersMap[globalIdx];
+            const ic = sv === cv;
+            const studentAns = sv ? q.options[sv.charCodeAt(0)-97][currentLang] : (currentLang === 'ar' ? 'لم يجب' : 'No answer');
+            const correctAns = q.options[q.correct][currentLang];
+            
+            questionsHTML += `<tr style="background:${ic ? '#f0fdf4' : '#fef2f2'};">
+                <td style="padding:8px;border:1px solid #e5e7eb;text-align:center;">${globalIdx+1}</td>
+                <td style="padding:8px;border:1px solid #e5e7eb;">${q.q[currentLang]}</td>
+                <td style="padding:8px;border:1px solid #e5e7eb;color:${ic ? '#059669' : '#dc2626'};">${studentAns}</td>
+                <td style="padding:8px;border:1px solid #e5e7eb;color:#059669;">${correctAns}</td>
+                <td style="padding:8px;border:1px solid #e5e7eb;text-align:center;">${ic ? '✅' : '❌'}</td>
+            </tr>`;
+            globalIdx++;
+        });
+    });
+    
+    const answersHTML = `<div style="font-family:'Segoe UI',Tahoma,Arial;direction:${currentLang==='ar'?'rtl':'ltr'};">
+        <div style="background:linear-gradient(135deg,#dc2626,#ef4444);color:white;padding:20px;border-radius:10px 10px 0 0;text-align:center;">
+            <h2 style="margin:0;">${currentExam.title[currentLang]} - ${currentLang === 'ar' ? 'نتيجة المراجعة' : 'Review Result'}</h2>
+        </div>
+        <div style="background:#fef2f2;padding:15px;">
+            <table style="width:100%;"><tr>
+                <td style="padding:8px;font-weight:bold;">${currentLang === 'ar' ? 'الاسم:' : 'Name:'}</td><td>${name}</td>
+                <td style="padding:8px;font-weight:bold;">${currentLang === 'ar' ? 'الشعبة:' : 'Class:'}</td><td>${studentClass}</td>
+            </tr><tr>
+                <td style="padding:8px;font-weight:bold;">${currentLang === 'ar' ? 'التاريخ:' : 'Date:'}</td><td>${date}</td>
+                <td style="padding:8px;font-weight:bold;">${currentLang === 'ar' ? 'التقدير:' : 'Grade:'}</td><td>${badge}</td>
+            </tr></table>
+        </div>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:15px;">
+            <thead><tr style="background:#dc2626;color:white;">
+                <th style="padding:8px;border:1px solid #e5e7eb;">#</th>
+                <th style="padding:8px;border:1px solid #e5e7eb;">${currentLang === 'ar' ? 'السؤال' : 'Question'}</th>
+                <th style="padding:8px;border:1px solid #e5e7eb;">${currentLang === 'ar' ? 'إجابة الطالب' : 'Student'}</th>
+                <th style="padding:8px;border:1px solid #e5e7eb;">${currentLang === 'ar' ? 'الصحيحة' : 'Correct'}</th>
+                <th style="padding:8px;border:1px solid #e5e7eb;">${currentLang === 'ar' ? 'النتيجة' : 'Result'}</th>
+            </tr></thead>
+            <tbody>${questionsHTML}</tbody>
+        </table>
+    </div>`;
+    
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        to_email: TARGET_EMAIL,
+        student_name: name,
+        student_class: studentClass,
+        exam_date: date,
+        total_score: score,
+        grade: badge,
+        answers_table: answersHTML
+    }).then(() => {
+        status.textContent = currentLang === 'ar' ? '✅ تم الإرسال بنجاح!' : '✅ Sent successfully!';
+        status.style.color = '#059669';
+        btn.textContent = currentLang === 'ar' ? '✓ تم' : '✓ Sent';
+    }).catch(err => {
+        status.textContent = currentLang === 'ar' ? '❌ حدث خطأ' : '❌ Error';
+        status.style.color = '#dc2626';
+        btn.disabled = false;
+        btn.textContent = currentLang === 'ar' ? '📧 حاول مرة أخرى' : '📧 Try Again';
+        console.error(err);
+    });
+}
+
+// ==================== Initialization ====================
+window.addEventListener('DOMContentLoaded', () => {
+    const saved = loadState();
+    if (saved) {
+        if (saved.studentName) document.getElementById('studentName').value = saved.studentName;
+        if (saved.studentClass) document.getElementById('studentClass').value = saved.studentClass;
+        if (saved.examDate) document.getElementById('examDate').value = saved.examDate;
+        
+        if (saved.currentExam && EXAMS_DB[saved.currentExam]) {
+            loadExam(saved.currentExam);
+            if (saved.answers) restoreAnswers(saved.answers);
+            if (saved.timeRemaining) timeRemaining = saved.timeRemaining;
+            if (saved.seed) currentSeed = saved.seed;
+        }
+    }
+    
+    renderDashboard();
+    
+    ['studentName', 'studentClass', 'examDate'].forEach(id => {
+        document.getElementById(id).addEventListener('input', saveState);
+    });
+});
+
+window.addEventListener('beforeunload', () => saveState());
+</script>
+</body>
+</html>
